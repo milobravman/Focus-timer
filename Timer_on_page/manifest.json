@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "Focus-timer",
+    "version": "1.0",
+    "action": {
+        "default_title": "timer-menu",
+        "default_popup": "popup.html"
+      },
+    "permissions": ["activeTab", "scripting", "tabs"],
+    "background": {
+      "service_worker": "background.js"
+    }
+}
