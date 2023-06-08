@@ -1,16 +1,17 @@
 let tabId; // this will hold the tab that needs to be focused on
 
-chrome.runtime.
-
-chrome.alarms.create('demo-default-alarm', {
-  delayInMinutes: 1,
-  periodInMinutes: 1
-});
+//chrome.runtime.
+function makeAlarm(time) {
+    chrome.alarms.create('demo-default-alarm', {
+      delayInMinutes: time,
+    });
+}
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   console.log("alarm went off!!")
-  chrome.action.setIcon({
-    path: getIconPath(alarm.name),
-  });
+
 });
 
+chrome.runtime.onMessage.addListener((message) =>{
+    makeAlarm(message.message)
+})
