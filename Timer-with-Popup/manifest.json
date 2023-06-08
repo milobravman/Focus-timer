@@ -9,5 +9,9 @@
   "permissions": ["tabs", "scripting", "alarms"],
   "background": {
     "service_worker": "background-wrapper.js"
-  }
+  },
+  "web_accessible_resources": [{
+    "resources":["audio/t-rex-roar.mp3", "audio/yay-6120.mp3"],
+    "matches":["https://*/*"]
+}]
 }
