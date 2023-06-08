@@ -7,6 +7,7 @@
       "default_popup": "popup.html"
     },
   "permissions": ["tabs", "scripting", "alarms"],
+  "host_permissions": ["https://*/*"],
   "background": {
     "service_worker": "background-wrapper.js"
   },

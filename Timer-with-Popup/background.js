@@ -1,21 +1,21 @@
-let tabId; // this will hold the tab that needs to be focused on
-
-//chrome.runtime.
 function makeAlarm(time) {
     chrome.alarms.create('demo-default-alarm', {
       delayInMinutes: time,
     });
 }
 
-chrome.alarms.onAlarm.addListener((alarm) => {
+chrome.alarms.onAlarm.addListener(() => {
   console.log("alarm went off!!")
 
 });
 
 chrome.runtime.onMessage.addListener((message) =>{
-  console.log(message)
-  console.log(message.time)
-  console.log(message.tabId)
+  console.log("onMessageEvent fired")
+  makeAlarm(message.time)
+  chrome.scripting.executeScript({
+    files:["/scripts/pageObserver.js"],
+    target:{tabId: message.tabId}
+  })
 })
 
 chrome.runtime.onConnect.addListener(function(port) {
