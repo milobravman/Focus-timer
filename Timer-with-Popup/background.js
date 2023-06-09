@@ -5,13 +5,15 @@ function makeAlarm(time) {
       delayInMinutes: time,
     });
 }
-
-chrome.alarms.onAlarm.addListener(() => {
-  console.log("alarm went off!!")
-  console.log(tab_Id)
-  chrome.tabs.sendMessage(tab_Id, "test")
-});
-
+try {
+  chrome.alarms.onAlarm.addListener(() => {
+    console.log("alarm went off!!")
+    console.log(tab_Id)
+    chrome.tabs.sendMessage(tab_Id, "test")
+  });  
+} catch (error) {
+  console.log(error)
+}
 chrome.runtime.onMessage.addListener((message) =>{
   console.log("onMessageEvent fired")
   makeAlarm(message.time)
