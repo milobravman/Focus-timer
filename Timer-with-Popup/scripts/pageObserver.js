@@ -17,20 +17,9 @@ try {
         document.removeEventListener("visibilitychange", handleVisblityChange);
     }
     
-    // let port = chrome.runtime.connect({name: "knockknock"});
-    // port.postMessage({joke: "portOpened"});
-    // port.onMessage.addListener(function(msg) {
-    //   if (msg.question === "timer-is-done"){
-    //       port.postMessage({answer: "awesome"});
-    //       myAudioPass.play()
-    //       document.removeEventListener("visibilitychange", handleVisblityChange);
-    //   }
-    //   else if (msg.question === "Madame who?")
-    //     port.postMessage({answer: "Madame... Bovary"});
-    // });
-    
     chrome.runtime.onMessage.addListener((message) => {
         myAudioPass.play()
+        document.removeEventListener("visibilitychange", handleVisblityChange);
         console.log(message)
     })
 } catch (error) {
