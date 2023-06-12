@@ -1,7 +1,13 @@
 #timer-input-container{
-    margin: 1%;
+    margin: 4%;
 }
 
 .center, #startTimer{
     text-align: center;
+}
+
+body{
+    width: 193px;
+    height: 115px;
+    margin: 0;
 }
