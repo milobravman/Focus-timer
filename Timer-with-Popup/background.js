@@ -8,7 +8,7 @@ let tab_Id
 
 function makeAlarm(time) {
     chrome.alarms.create('demo-default-alarm', {
-      delayInMinutes: time,
+      when: Date.now() + time,
     });
 }
 try {
