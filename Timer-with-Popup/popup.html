@@ -8,7 +8,7 @@
   </head>
   <body>
 
-    <h3>Focus timer!</h3>
+    <h3 class="center">Focus timer!</h3>
     <!-- <div>
         <input id="time_to_set" type="number" placeholder="focustime in mins">
         <button id="getTime">set</button>
@@ -18,9 +18,13 @@
     <div id="buttons">
         <button>start</button> -->
         <!-- <label for="timer-input">00h 00m 00s</label> -->
-        <label for="timer-input">enter focus time in minutes</label>
-        <input id="timer-input" type="tel">
-        <button id = 'startTimer'>set</button>
+        <div id="timer-input-container">
+          <label for="timer-input">enter focus time in minutes</label>
+          <input id="timer-input" type="number">
+        </div>
+        <div class="center">
+          <button id ='startTimer'>set</button>
+        </div>
     <script src="./popup.js" type="module"></script>
   </body>
 </html>

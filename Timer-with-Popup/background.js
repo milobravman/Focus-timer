@@ -1,3 +1,9 @@
+chrome.runtime.onStartup.addListener(() =>{
+  chrome.action.setBadgeText({
+    text: "OFF",
+  });
+});
+
 let tab_Id
 
 function makeAlarm(time) {
