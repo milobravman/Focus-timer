@@ -18,7 +18,6 @@ function getTime(id) {
         sendTime(time , id)
     }
     console.log(id)
-    // I probobly should have an error message if the put in a fraction or a string
 }
 
 
@@ -28,12 +27,18 @@ function sendTime(time, id) {
     const message = {}
     message.tabId = id
     message.time = time
-    chrome.runtime.sendMessage(message)
+    const sending = chrome.runtime.sendMessage(message)
+    sending.then(handleRes)
     timeWrapper(time)
+}
+
+function handleRes(res) {
+    console.log(res)
 }
 
 function handleCLick() {
     wrapper()
+    document.getElementById("timer-input").style.display = "none";
 }
 
 startTimer.addEventListener(
@@ -42,8 +47,9 @@ startTimer.addEventListener(
 )
 
 function timeWrapper(time) {
-    //let end = Date.now() + (time *60_000) 
     let dummyTimer = setInterval(dumTimer, 1000)
+    let countDown = document.getElementById("count-down")
+    countDown.style.display = "inline"
     setTimeout(() => {
         console.log("clear interval should fire")
         clearInterval(dummyTimer)
@@ -75,6 +81,7 @@ function timeWrapper(time) {
 
         let p_time = "00:" + mins+ ":" + sec
         console.log(p_time)
+        countDown.innerHTML = p_time
     }
 }
 
