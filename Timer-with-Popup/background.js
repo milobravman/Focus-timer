@@ -5,8 +5,6 @@ chrome.runtime.onStartup.addListener(() =>{
 
 });
 
-
-
 let tab_Id
 
 function makeAlarm(time) {
