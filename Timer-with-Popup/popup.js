@@ -1,5 +1,15 @@
 const startTimer = document.getElementById('startTimer');
 
+checkExisting()
+
+function checkExisting() {
+    const sending = chrome.runtime.sendMessage("any existing alarms?")
+    sending.then((res) => {console.log(res)})
+    chrome.storage.local.get(["stop"]).then((result) => {
+        console.log(result.stop)
+    })
+}
+
 function wrapper() {
     const getTab = new Promise((resolve, reject) => {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
@@ -27,6 +37,7 @@ function sendTime(time, id) {
     const message = {}
     message.tabId = id
     message.time = time
+    console.log(message)
     const sending = chrome.runtime.sendMessage(message)
     sending.then(handleRes)
     timeWrapper(time)
