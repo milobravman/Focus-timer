@@ -2,7 +2,12 @@ chrome.runtime.onStartup.addListener(() =>{
   chrome.action.setBadgeText({
     text: "OFF",
   });
+});
 
+chrome.runtime.onInstalled.addListener(() =>{
+  chrome.action.setBadgeText({
+    text: "OFF",
+  });
 });
 
 let tab_Id
@@ -18,8 +23,13 @@ try {
       console.log("alarm went off!!")
       console.log(tab_Id)
       chrome.tabs.sendMessage(tab_Id, "test")
-    }else{
-      console.log("something when wrong in the alarm listener")
+    }else
+    {
+      console.log("getting key from storage API")
+      chrome.storage.local.get(["key"]).then((result) => {
+        console.log("the value of key is" + result.key)
+        chrome.tabs.sendMessage(result.key, "test-from-the-backround")
+      })
     }
   });  
 } catch (error) {
@@ -29,6 +39,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
   console.log("onMessageEvent fired")
   tab_Id = message.tabId
   if (tab_Id != undefined){
+    chrome.storage.local.set({key: tab_Id}).then(() => {
+      console.log("value is set")
+    })
     makeAlarm(message.time)
     console.log(tab_Id)
     sendResponse("responce from brackround.js")
