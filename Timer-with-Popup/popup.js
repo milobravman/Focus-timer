@@ -16,7 +16,6 @@ function checkExisting() {
         if (Number.isSafeInteger(result.stop))// this is checks if a alarm exists
         {  
             let timeLeft = result.stop - Date.now()
-            console.log("TimeLeft!"+timeLeft)
             if (timeLeft > 0) {
                 document.getElementById("timer-input").style.display = "none";
                 document.getElementById("startTimer").style.display = "none";
@@ -50,11 +49,9 @@ function getTime(id) {
 
 // sends the TabID and the time in minutes to the backround.js
 function sendTime(time, id) {
-    console.log("sendTime is runing")
     const message = {}
     message.tabId = id
     message.time = time
-    console.log(message)
     const sending = chrome.runtime.sendMessage(message)
     sending
     timeWrapper(time)
@@ -121,7 +118,6 @@ function timeWrapper(time) {
         }
 
         let p_time = hours + ":" + mins+ ":" + sec
-        console.log(p_time)
         countDown.innerHTML = p_time
     }
 }
