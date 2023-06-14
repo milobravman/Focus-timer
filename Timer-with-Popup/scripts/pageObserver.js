@@ -21,8 +21,6 @@ try {
     chrome.runtime.onMessage.addListener((message) => {
         myAudioPass.play()
         document.removeEventListener("visibilitychange", handleVisblityChange);
-        console.log(message)
-    
     })
 } catch (error) {
     console.log(error)
