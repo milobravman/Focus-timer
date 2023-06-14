@@ -3,10 +3,20 @@ const startTimer = document.getElementById('startTimer');
 checkExisting()
 
 function checkExisting() {
-    const sending = chrome.runtime.sendMessage("any existing alarms?")
-    sending.then((res) => {console.log(res)})
+    // const sending = chrome.runtime.sendMessage("any existing alarms?")
+    // sending.then((res) => {console.log(res)})
     chrome.storage.local.get(["stop"]).then((result) => {
-        console.log(result.stop)
+        //console.log(result.stop)
+        //console.log(Number.isSafeInteger(result.stop))
+        if (Number.isSafeInteger(result.stop))// this is checks if a alarm exists
+        {  
+            let timeLeft = result.stop - Date.now()
+            console.log("TimeLeft!"+timeLeft)
+            if (timeLeft > 0) {
+                document.getElementById("timer-input").style.display = "none";
+                timeWrapper(timeLeft/60_000)
+            }
+        }
     })
 }
 
@@ -66,7 +76,7 @@ function timeWrapper(time) {
         clearInterval(dummyTimer)
     }, (time)* 60_000);
 
-    let total_sec = time * 60
+    let total_sec = Math.floor(time * 60)
 
     function dumTimer() {
         total_sec -=1
@@ -95,5 +105,3 @@ function timeWrapper(time) {
         countDown.innerHTML = p_time
     }
 }
-
-

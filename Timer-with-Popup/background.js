@@ -25,6 +25,7 @@ try {
       console.log("the value of key is" + result.key)
       chrome.tabs.sendMessage(result.key, "test-from-the-backround")
     })
+    chrome.action.setBadgeText({text: "OFF",});
   });  
 } catch (error) {
   console.log(error)
@@ -45,11 +46,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
       files:["/scripts/pageObserver.js"],
       target:{tabId: message.tabId}
     })
+    chrome.action.setBadgeText({text: "ON",});
+
   // this second case handles getting the current timer
   }else if (message === "the user failed"){
     console.log("inside the stoping the alarm case")
     chrome.alarms.clearAll()
     chrome.storage.local.set({stop: null})
+    chrome.action.setBadgeText({text: "OFF",});
   }else{
     chrome.storage.local.get(["stop"]).then((result) => {
       console.log(result.stop)
