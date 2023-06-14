@@ -1,13 +1,18 @@
+// Popup.js is resonsible for 
+
+// talking in user input and sending it to the backround.js
+
+// having a realtime counter that is close to what the alarm is set for
+
+// getting an alram info if one has already been set
+
+
 const startTimer = document.getElementById('startTimer');
 
 checkExisting()
 
 function checkExisting() {
-    // const sending = chrome.runtime.sendMessage("any existing alarms?")
-    // sending.then((res) => {console.log(res)})
     chrome.storage.local.get(["stop"]).then((result) => {
-        //console.log(result.stop)
-        //console.log(Number.isSafeInteger(result.stop))
         if (Number.isSafeInteger(result.stop))// this is checks if a alarm exists
         {  
             let timeLeft = result.stop - Date.now()
@@ -20,6 +25,8 @@ function checkExisting() {
     })
 }
 
+
+// gets the current open tab
 function wrapper() {
     const getTab = new Promise((resolve, reject) => {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
@@ -32,16 +39,15 @@ function wrapper() {
     })    
 }
 
+// gets the user inputed value 
 function getTime(id) {    
     let time = parseInt(document.getElementById('timer-input').value)
     if (Number.isSafeInteger(time)){
         sendTime(time , id)
     }
-    console.log(id)
 }
 
-
-//send message doesn't run sometimes?
+// sends the TabID and the time in minutes to the backround.js
 function sendTime(time, id) {
     console.log("sendTime is runing")
     const message = {}
@@ -49,14 +55,15 @@ function sendTime(time, id) {
     message.time = time
     console.log(message)
     const sending = chrome.runtime.sendMessage(message)
-    sending.then(handleRes)
+    sending
     timeWrapper(time)
 }
 
-function handleRes(res) {
-    console.log(res)
-}
-
+// begins a sequence of functions that 
+// taking in user input
+// run some verfications
+// send data to other parts of the extetnion
+// create a real time counter
 function handleCLick() {
     wrapper()
     document.getElementById("timer-input").style.display = "none";
@@ -67,6 +74,8 @@ startTimer.addEventListener(
     handleCLick
 )
 
+
+// creates a realtime counter that shows up in popup.html
 function timeWrapper(time) {
     let dummyTimer = setInterval(dumTimer, 1000)
     let countDown = document.getElementById("count-down")
