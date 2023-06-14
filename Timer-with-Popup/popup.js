@@ -80,7 +80,17 @@ function timeWrapper(time) {
 
     function dumTimer() {
         total_sec -=1
-        let mins = Math.floor(total_sec/60)
+        let hours = Math.floor(total_sec/(60*60))
+        let mins = Math.floor(total_sec/60)%60
+        let sec = total_sec%60
+
+        if (hours === 0) {
+            hours = "00"
+        }
+
+        if (hours < 10 && hours > 0){
+            hours = '0'+hours 
+        }
 
         if (mins === 0) {
             mins = "00"
@@ -90,7 +100,6 @@ function timeWrapper(time) {
             mins = '0'+mins 
         }
 
-        let sec = total_sec%60
 
         if (sec === 0) {
             sec = "00"
@@ -100,7 +109,7 @@ function timeWrapper(time) {
             sec = '0'+sec 
         }
 
-        let p_time = "00:" + mins+ ":" + sec
+        let p_time = hours + ":" + mins+ ":" + sec
         console.log(p_time)
         countDown.innerHTML = p_time
     }
