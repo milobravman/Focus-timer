@@ -19,6 +19,7 @@ function checkExisting() {
             console.log("TimeLeft!"+timeLeft)
             if (timeLeft > 0) {
                 document.getElementById("timer-input").style.display = "none";
+                document.getElementById("startTimer").style.display = "none";
                 timeWrapper(timeLeft/60_000)
             }
         }
@@ -67,6 +68,7 @@ function sendTime(time, id) {
 function handleCLick() {
     wrapper()
     document.getElementById("timer-input").style.display = "none";
+    document.getElementById("startTimer").style.display = "none";
 }
 
 startTimer.addEventListener(
