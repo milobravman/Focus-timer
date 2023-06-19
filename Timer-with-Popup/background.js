@@ -1,8 +1,8 @@
 // Backround.js is responsible for
 
-// Icon managment
+// Icon management
 
-// seting the alarm that contorles the succuss case
+// setting the alarm that controls the succuss case
 
 // injecting the script into the tab the user wants to focus on
 
@@ -20,7 +20,7 @@ chrome.runtime.onInstalled.addListener(() =>{
   });
 });
 
-// holds the tab_ID this probobly should be deleted at some point and the tab_ID should be full handled by the stroage API
+// holds the tab_ID this probably should be deleted at some point and the tab_ID should be full handled by the storage API
 let tab_Id
 
 // makes the alarm that controls the when use has finished focusing
