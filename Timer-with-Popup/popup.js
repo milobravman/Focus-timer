@@ -1,10 +1,10 @@
-// Popup.js is resonsible for 
+// Popup.js is responsible for 
 
-// talking in user input and sending it to the backround.js
+// talking in user input and sending it to the background.js
 
 // having a realtime counter that is close to what the alarm is set for
 
-// getting an alram info if one has already been set
+// getting an alarm info if one has already been set
 
 
 const startTimer = document.getElementById('startTimer');

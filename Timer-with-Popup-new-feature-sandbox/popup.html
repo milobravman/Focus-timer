@@ -9,15 +9,12 @@
   <body>
 
     <h3 class="center">Focus timer!</h3>
-    <!-- <div>
-        <input id="time_to_set" type="number" placeholder="focustime in mins">
-        <button id="getTime">set</button>
-    </div>
-    <div id="clock">0:0:0</div>
-    
-    <div id="buttons">
-        <button>start</button> -->
-        <!-- <label for="timer-input">00h 00m 00s</label> -->
+      <div class="nav">
+        <button class="page-1">page2!</button> 
+        <!-- backward because when page 1 is visible the button for page 2 should be -->
+        <button class="page-2" style="display: none;">page-1!</button> 
+      </div>
+      <div class="page-1">
         <div id="timer-input-container">
           <label for="timer-input">Enter focus time in minutes</label>
           <input id="timer-input" type="number">
@@ -26,6 +23,11 @@
         <div class="center">
           <button id ='startTimer'>set</button>
         </div>
+      </div>
+      <div class="page-2" style="display: none">
+        <h4>Block-Sites!</h4>
+          <button id ='block-button'>Block this site!</button>
+      </div>
     <script src="./popup.js" type="module"></script>
   </body>
 </html>

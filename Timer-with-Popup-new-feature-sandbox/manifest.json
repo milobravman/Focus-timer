@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Focus-timer-Popup",
+  "name": "Focus-timer-sandbox",
   "version": "1.0",
   "icons": {
     "16": "images/icon-16.png",
