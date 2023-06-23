@@ -1,14 +1,49 @@
-// Popup.js is resonsible for 
+// Popup.js is responsible for 
 
-// talking in user input and sending it to the backround.js
+// talking in user input and sending it to the background.js
 
 // having a realtime counter that is close to what the alarm is set for
 
-// getting an alram info if one has already been set
+// getting an alarm info if one has already been set
 
 
 const startTimer = document.getElementById('startTimer');
+startTimer.addEventListener(
+    'click',
+    handleCLick
+    )
+    // begins a sequence of functions that 
+    // taking in user input
+    // run some verifications
+    // send data to other parts of the extension
+    // create a real time counter
+function handleCLick() {
+    wrapper()
+    document.getElementById("timer-input").style.display = "none";
+    document.getElementById("startTimer").style.display = "none";
+}
+    
 
+
+const goToPageTwo = document.getElementById('page-2-button')
+    
+goToPageTwo.addEventListener(
+    'click',
+    makePage2Visible
+)
+
+function makePage2Visible() {
+    console.log("make page 1 disapear!")
+    document.getElementsByClassName("page-1").style.display= "none"
+    document.getElementsByClassName("page-2").style.display= "inline"
+}
+
+const goToPageOne = document.getElementById("page-1-button")
+goToPageone.addEventListener(
+    'click',
+    handlePage1
+)
+        
 checkExisting()
 
 function checkExisting() {
@@ -39,7 +74,7 @@ function wrapper() {
     })    
 }
 
-// gets the user inputed value 
+// gets the user inputted value 
 function getTime(id) {    
     let time = parseInt(document.getElementById('timer-input').value)
     if (Number.isSafeInteger(time)){
@@ -47,7 +82,7 @@ function getTime(id) {
     }
 }
 
-// sends the TabID and the time in minutes to the backround.js
+// sends the TabID and the time in minutes to the background.js
 function sendTime(time, id) {
     const message = {}
     message.tabId = id
@@ -56,22 +91,6 @@ function sendTime(time, id) {
     sending
     timeWrapper(time)
 }
-
-// begins a sequence of functions that 
-// taking in user input
-// run some verfications
-// send data to other parts of the extetnion
-// create a real time counter
-function handleCLick() {
-    wrapper()
-    document.getElementById("timer-input").style.display = "none";
-    document.getElementById("startTimer").style.display = "none";
-}
-
-startTimer.addEventListener(
-    'click',
-    handleCLick
-)
 
 
 // creates a realtime counter that shows up in popup.html
@@ -95,28 +114,28 @@ function timeWrapper(time) {
         if (hours === 0) {
             hours = "00"
         }
-
+        
         if (hours < 10 && hours > 0){
             hours = '0'+hours 
         }
-
+        
         if (mins === 0) {
             mins = "00"
         }
-
+        
         if (mins < 10 && mins > 0){
             mins = '0'+mins 
         }
-
-
+        
+        
         if (sec === 0) {
             sec = "00"
         }
-
+        
         if (sec < 10 && sec > 0){
             sec = '0'+sec 
         }
-
+        
         let p_time = hours + ":" + mins+ ":" + sec
         countDown.innerHTML = p_time
     }
