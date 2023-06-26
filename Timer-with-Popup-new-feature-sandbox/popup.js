@@ -6,6 +6,26 @@
 
 // getting an alarm info if one has already been set
 
+// check accessible url. this will check to see if this is a sight that the extension can access and block any features if not
+
+function checkAccessiblePage () {
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+        if (tabs[0].url === undefined){
+            console.log("extension not available on this page")
+            let page = document.getElementsByTagName('div')
+            for (let i = 0; i< page.length; i++) {
+                page[i].innerHTML=""
+            }
+            const notAvailable = document.createElement("span")
+            notAvailable.innerHTML ="Not available on this page"
+            let title = document.getElementsByTagName('div')
+            document.body.insertBefore(notAvailable, title[0])
+        } 
+      });
+}
+
+checkAccessiblePage()
+
 
 const startTimer = document.getElementById('startTimer');
 startTimer.addEventListener(
@@ -83,8 +103,11 @@ function checkExisting() {
 
 // gets the current open tab
 function wrapper() {
+    console.log("wrapper firing")
     const getTab = new Promise((resolve, reject) => {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+            console.log("hi")
+            console.log(tabs[0].url)
             let id = tabs[0].id
             resolve(id)
           });
