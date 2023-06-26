@@ -33,16 +33,28 @@ goToPageTwo.addEventListener(
 )
 
 function makePage2Visible() {
-    console.log("make page 1 disapear!")
-    document.getElementsByClassName("page-1").style.display= "none"
-    document.getElementsByClassName("page-2").style.display= "inline"
+    console.log("make page 1 disappear!")
+    let pageOneElements = document.getElementsByClassName("page-1")
+    for (let i = 0; i< pageOneElements.length; i++) {
+        pageOneElements[i].style.display="none";
+    }
+    
+    let pageTwoElements = document.getElementsByClassName("page-2")
+    for (let i = 0; i< pageTwoElements.length; i++) {
+        pageTwoElements[i].style.display="inline";
+    }
+
 }
 
 const goToPageOne = document.getElementById("page-1-button")
 goToPageone.addEventListener(
     'click',
-    handlePage1
+    makePage1Visible
 )
+
+function makePage1Visible() {
+    console.log("make page 2 disappear")
+}
         
 checkExisting()
 
