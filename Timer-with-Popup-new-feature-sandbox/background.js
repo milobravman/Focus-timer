@@ -1,4 +1,4 @@
-// Backround.js is responsible for
+// Background.js is responsible for
 
 // Icon management
 
@@ -20,11 +20,24 @@ chrome.runtime.onInstalled.addListener(() =>{
   });
 });
 
+
+chrome.webRequest.onBeforeRequest.addListener(
+    (obj) =>{
+    console.log(obj)
+  },
+  // filters
+  {
+    urls: ["https://www.theringer.com/"]
+  },
+  // extraInfoSpec
+  
+)
+
 // holds the tab_ID this probably should be deleted at some point and the tab_ID should be full handled by the storage API
 let tab_Id
 
 // makes the alarm that controls the when use has finished focusing
-// also stores the thime when the user should stop in the storage API
+// also stores the time when the user should stop in the storage API
 function makeAlarm(time) {
   let now = Date.now() + (time * 60_000)
   chrome.alarms.create('demo-default-alarm', {
