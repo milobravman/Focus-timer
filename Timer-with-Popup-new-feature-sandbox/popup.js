@@ -14,22 +14,26 @@ function handlePageBlock() {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         // console.log(tabs[0])
         // console.log(tabs[0].url)
-
         let newRule = {};
         chrome.declarativeNetRequest.getDynamicRules().then((res) =>{
             console.log(res)
             newRule.id = res.length+1
             newRule.priority = 1
-            newRule.action = {"type": "block"}
+            newRule.action = {
+                "type": "redirect",
+                "redirect": {
+                  "url": "chrome-extension://gnbokcjhngcimlglbljpjapodhpaoimm/index.html"
+                }
+              }
             newRule.condition = {
                 "urlFilter": tabs[0].url,
                 "resourceTypes": ["main_frame"]
             }
             chrome.declarativeNetRequest.updateDynamicRules({
-                addRules:[newRule]
+                addRules:[newRule],
             })
+            chrome.tabs.create({ url: 'index.html' });
         })
-        
       });
     // get the active tab and get the url
     // then add it to the dynamic rules

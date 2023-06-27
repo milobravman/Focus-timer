@@ -2,7 +2,12 @@
     {
       "id": 1,
       "priority": 1,
-      "action": { "type": "block" },
+      "action": {
+        "type": "redirect",
+        "redirect": {
+          "url": "chrome-extension://gnbokcjhngcimlglbljpjapodhpaoimm/index.html"
+        }
+      },
       "condition": {
         "urlFilter": "||theringer.com",
         "resourceTypes": ["main_frame"]
