@@ -22,14 +22,15 @@ chrome.runtime.onInstalled.addListener(() =>{
 
 chrome.declarativeNetRequest.updateDynamicRules({
   addRules:[{
-    'id': 2,
+    'id': 1,
     "priority": 1,
     "action": { "type": "block" },
     "condition": {
       "urlFilter": "||twitter.com",
       "resourceTypes": ["main_frame"]
     }
-  }]
+  }],
+  removeRuleIds: [1] //seems like this prevent trying to add this rule multiple times 
 })
 
 // using webRequest might be replaced with declarativeNetRequest 

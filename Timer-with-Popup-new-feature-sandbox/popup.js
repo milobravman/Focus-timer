@@ -11,6 +11,22 @@ document.getElementById('block-button').addEventListener('click', handlePageBloc
 
 function handlePageBlock() {
     console.log("handle-block Online!!")
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+        // console.log(tabs[0])
+        // console.log(tabs[0].url)
+
+        let newRule = [];
+        chrome.declarativeNetRequest.getDynamicRules().then((res) =>{
+            console.log(res)
+            numberDynRules = res.length
+        })
+
+
+        //console.log(huh)
+      });
+    // get the active tab and get the url
+    // then add it to the dynamic rules
+    // then refresh or redirect form the page
 }
 
 // check accessible url. this will check to see if this is a sight that the extension can access and block any features if not
