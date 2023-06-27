@@ -20,7 +20,8 @@ chrome.runtime.onInstalled.addListener(() =>{
   });
 });
 
-
+// using webRequest might be replaced with declarativeNetRequest 
+// I will need to test my app without the code below and the WebRequest permission removed or likely suffer from my extension being rejected at least once  
 chrome.webRequest.onBeforeRequest.addListener(
     (obj) =>{
     console.log(obj)
