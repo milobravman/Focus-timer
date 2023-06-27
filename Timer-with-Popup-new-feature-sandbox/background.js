@@ -20,6 +20,18 @@ chrome.runtime.onInstalled.addListener(() =>{
   });
 });
 
+chrome.declarativeNetRequest.updateDynamicRules({
+  addRules:[{
+    'id': 2,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||twitter.com",
+      "resourceTypes": ["main_frame"]
+    }
+  }]
+})
+
 // using webRequest might be replaced with declarativeNetRequest 
 // I will need to test my app without the code below and the WebRequest permission removed or likely suffer from my extension being rejected at least once  
 // chrome.webRequest.onBeforeRequest.addListener(
