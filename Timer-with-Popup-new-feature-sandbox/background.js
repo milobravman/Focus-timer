@@ -22,17 +22,16 @@ chrome.runtime.onInstalled.addListener(() =>{
 
 // using webRequest might be replaced with declarativeNetRequest 
 // I will need to test my app without the code below and the WebRequest permission removed or likely suffer from my extension being rejected at least once  
-chrome.webRequest.onBeforeRequest.addListener(
-    (obj) =>{
-    console.log(obj)
-  },
-  // filters
-  {
-    urls: ["https://www.theringer.com/"]
-  },
-  // extraInfoSpec
-  
-)
+// chrome.webRequest.onBeforeRequest.addListener(
+//     (obj) =>{
+//     console.log(obj)
+//   },
+//   // filters
+//   {
+//     urls: ["https://www.theringer.com/"]
+//   },
+//   // extraInfoSpec
+// )
 
 // holds the tab_ID this probably should be deleted at some point and the tab_ID should be full handled by the storage API
 let tab_Id
