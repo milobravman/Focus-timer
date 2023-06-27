@@ -15,14 +15,20 @@ function handlePageBlock() {
         // console.log(tabs[0])
         // console.log(tabs[0].url)
 
-        let newRule = [];
+        let newRule = {};
         chrome.declarativeNetRequest.getDynamicRules().then((res) =>{
             console.log(res)
-            numberDynRules = res.length
+            newRule.id = res.length+1
+            newRule.priority = 1
+            newRule.action = {"type": "block"}
+            newRule.condition = {
+                "urlFilter": tabs[0].url,
+                "resourceTypes": ["main_frame"]
+            }
+            chrome.declarativeNetRequest.updateDynamicRules({
+                addRules:[newRule]
+            })
         })
-
-
-        //console.log(huh)
       });
     // get the active tab and get the url
     // then add it to the dynamic rules
