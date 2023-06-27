@@ -6,8 +6,14 @@
 
 // getting an alarm info if one has already been set
 
-// check accessible url. this will check to see if this is a sight that the extension can access and block any features if not
 
+document.getElementById('block-button').addEventListener('click', handlePageBlock)
+
+function handlePageBlock() {
+    console.log("handle-block Online!!")
+}
+
+// check accessible url. this will check to see if this is a sight that the extension can access and block any features if not
 function checkAccessiblePage () {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         if (tabs[0].url === undefined){
