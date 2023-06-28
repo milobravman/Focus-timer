@@ -41,6 +41,8 @@ function handlePageBlock() {
     // then refresh or redirect form the page
 }
 
+
+
 // check accessible url. this will check to see if this is a sight that the extension can access and block any features if not
 function checkAccessiblePage () {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
