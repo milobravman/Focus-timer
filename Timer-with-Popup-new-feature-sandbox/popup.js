@@ -30,9 +30,10 @@ function handlePageBlock() {
                 "resourceTypes": ["main_frame"]
             }
             chrome.declarativeNetRequest.updateDynamicRules({
-                addRules:[newRule],
+                addRules:[newRule]
+                //removeRuleIds: [1,2,3,4,5,6,7] currently my only way to unblock
             })
-            chrome.tabs.create({ url: 'index.html' });
+            //chrome.tabs.create({ url: 'index.html' });
         })
       });
     // get the active tab and get the url

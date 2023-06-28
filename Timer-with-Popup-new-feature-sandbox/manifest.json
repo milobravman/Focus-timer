@@ -20,15 +20,6 @@
     },
   "permissions": ["scripting", "alarms","storage","declarativeNetRequest", "declarativeNetRequestFeedback"],
   "host_permissions": ["<all_urls>"],
-  "declarative_net_request": {
-    "rule_resources": [
-      {
-        "id": "ruleset_1",
-        "enabled": true,
-        "path": "rules_1.json"
-      }
-    ]
-  },
   "background": {
     "service_worker": "background-wrapper.js"
   },
