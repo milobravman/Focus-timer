@@ -12,7 +12,7 @@ document.getElementById('block-button').addEventListener('click', handlePageBloc
 function handlePageBlock() {
     console.log("handle-block Online!!")
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-        // console.log(tabs[0])
+        console.log(tabs[0].id)
         // console.log(tabs[0].url)
         let newRule = {};
         chrome.declarativeNetRequest.getDynamicRules().then((res) =>{
@@ -33,8 +33,16 @@ function handlePageBlock() {
                 addRules:[newRule]
                 //removeRuleIds: [1,2,3,4,5,6,7, 8] //currently my only way to unblock
             })
-            //chrome.tabs.create({ url: 'index.html' });
         })
+        console.log(tabs[0].id)
+
+        if (tabs[0].id !=undefined){
+            console.log("the tabid is "+tabs[0].id)
+            chrome.scripting.executeScript({
+                files:["/scripts/refresh.js"],
+                target:{tabId: tabs[0].id}
+              })
+        }
       });
     // get the active tab and get the url
     // then add it to the dynamic rules
