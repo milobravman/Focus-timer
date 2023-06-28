@@ -24,7 +24,7 @@
     "service_worker": "background-wrapper.js"
   },
   "web_accessible_resources": [{
-    "resources":["audio/t-rex-roar.mp3", "audio/yay-6120.mp3"],
+    "resources":["audio/t-rex-roar.mp3", "audio/yay-6120.mp3", "index.html"],
     "matches":["<all_urls>"]
 }]
 }

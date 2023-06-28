@@ -22,7 +22,7 @@ function handlePageBlock() {
             newRule.action = {
                 "type": "redirect",
                 "redirect": {
-                  "url": "chrome-extension://gnbokcjhngcimlglbljpjapodhpaoimm/index.html"
+                  "extensionPath": "/index.html"
                 }
               }
             newRule.condition = {
@@ -31,7 +31,7 @@ function handlePageBlock() {
             }
             chrome.declarativeNetRequest.updateDynamicRules({
                 addRules:[newRule]
-                //removeRuleIds: [1,2,3,4,5,6,7] currently my only way to unblock
+                //removeRuleIds: [1,2,3,4,5,6,7, 8] //currently my only way to unblock
             })
             //chrome.tabs.create({ url: 'index.html' });
         })
