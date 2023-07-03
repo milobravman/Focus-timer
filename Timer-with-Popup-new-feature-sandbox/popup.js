@@ -9,6 +9,8 @@
 
 document.getElementById('block-button').addEventListener('click', handlePageBlock)
 
+const urlParser = /^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/
+
 function handlePageBlock() {
     console.log("handle-block Online!!")
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
@@ -17,6 +19,8 @@ function handlePageBlock() {
         let newRule = {};
         chrome.declarativeNetRequest.getDynamicRules().then((res) =>{
             console.log(res)
+            let urlParts = tabs[0].url.match(urlParser)
+            let urlDomain = urlParts[1]+'/'+urlParts[3] // gets urls in https:/www.name.com and cuts off anything more
             newRule.id = res.length+1
             newRule.priority = 1
             newRule.action = {
@@ -26,7 +30,7 @@ function handlePageBlock() {
                 }
               }
             newRule.condition = {
-                "urlFilter": tabs[0].url,
+                "urlFilter": urlDomain,
                 "resourceTypes": ["main_frame"]
             }
             chrome.declarativeNetRequest.updateDynamicRules({
