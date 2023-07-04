@@ -45,17 +45,27 @@ function handlePageBlock() {
             }
             chrome.declarativeNetRequest.updateDynamicRules({
                 addRules:[newRule]
-            })
+            }).then((res) =>
+                {
+                    if (tabs[0].id !=undefined){
+                        console.log("the tabid is "+tabs[0].id)
+                        chrome.scripting.executeScript({
+                            files:["/scripts/refresh.js"],
+                            target:{tabId: tabs[0].id}
+                          })
+                    }
+                }
+            )
         })
         console.log(tabs[0].id)
 
-        if (tabs[0].id !=undefined){
-            console.log("the tabid is "+tabs[0].id)
-            chrome.scripting.executeScript({
-                files:["/scripts/refresh.js"],
-                target:{tabId: tabs[0].id}
-              })
-        }
+        // if (tabs[0].id !=undefined){
+        //     console.log("the tabid is "+tabs[0].id)
+        //     chrome.scripting.executeScript({
+        //         files:["/scripts/refresh.js"],
+        //         target:{tabId: tabs[0].id}
+        //       })
+        // }
       });
     // get the active tab and get the url
     // then add it to the dynamic rules
