@@ -27,8 +27,11 @@ function handlePageBlock() {
         chrome.declarativeNetRequest.getDynamicRules().then((res) =>{
             console.log(res)
             let urlParts = new URL(tabs[0].url)
-            let urlDomain = urlParts.host
-            newRule.id = res.length+1
+            let newID = 0
+            res.forEach((rule) => {
+                newID = newID + rule.id
+            })
+            newRule.id = newID+1
             newRule.priority = 1
             newRule.action = {
                 "type": "redirect",
@@ -37,7 +40,7 @@ function handlePageBlock() {
                 }
               }
             newRule.condition = {
-                "urlFilter": urlDomain,
+                "urlFilter": urlParts.host,
                 "resourceTypes": ["main_frame"]
             }
             chrome.declarativeNetRequest.updateDynamicRules({

@@ -4,8 +4,11 @@ const myReg = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/
 const list = document.getElementById("block-list")
 
 chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
-    //console.log(res)
+    
+    // let col = 0
     res.forEach((score) => {
+        // col = col + score.id
+        // console.log("new id" + col)
         console.log(score);
         let temp = score.condition.urlFilter.match(myReg)
         //console.log(temp[1])
@@ -30,7 +33,8 @@ function handleRemove(id, dest) {
     chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds: [id] 
     }).then(() => {
-        console.log("attempting to reload link")
-        location.href = dest
+        //console.log("attempting to reload link")
+        //location.href = dest
+        location.reload()
     })
 }
