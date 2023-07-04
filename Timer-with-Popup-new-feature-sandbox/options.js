@@ -11,8 +11,27 @@ function handleSubmitBlock() {
         let url = new URL(document.getElementById('block-input').value)
         let newRule = {};
         chrome.declarativeNetRequest.getDynamicRules().then((res) => {
-            
+            let newID = 0
+            res.forEach((rule) => {
+                newID = newID + rule.id
+            })
+            newRule.id = newID+1
+            newRule.priority = 1
+            newRule.action = {
+                "type": "redirect",
+                "redirect": {
+                  "extensionPath": "/index.html"
+                }
+              }
+            newRule.condition = {
+                "urlFilter": url.host,
+                "resourceTypes": ["main_frame"]
+            }
+            chrome.declarativeNetRequest.updateDynamicRules({
+                addRules:[newRule]
+            })
         })
+        // html addition
     } catch (error) {
         console.log("not a valid URL")
         document.getElementById('block-input').value = ''
