@@ -18,7 +18,7 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
         removedListItem.addEventListener(
             'click',
             function (){
-                handleRemove(score.id, score.condition.urlFilter)
+                handleRemove(score.id)
             }
         )
         removedListItem.innerHTML = "remove"
@@ -28,7 +28,7 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
     });
 })
 
-function handleRemove(id, dest) {
+function handleRemove(id) {
     //document.getElementById(id)
     chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds: [id] 
