@@ -15,7 +15,7 @@ function handleSubmitBlock() {
             res.forEach((rule) => {
                 newID = newID + rule.id
             })
-            newRule.id = newID+1
+            newRule.id = newID+1 // collection still need +1 incase 1 or zero elements in the list 
             newRule.priority = 1
             newRule.action = {
                 "type": "redirect",
@@ -30,6 +30,19 @@ function handleSubmitBlock() {
             chrome.declarativeNetRequest.updateDynamicRules({
                 addRules:[newRule]
             })
+            let listItem = document.createElement("li")
+            let removedListItem = document.createElement('button')
+            removedListItem.id = newID+1
+            removedListItem.addEventListener(
+                'click',
+                function (){
+                    handleRemove(newID+1)
+                }
+            )
+            removedListItem.innerHTML = "remove"
+            listItem.innerHTML=listItem.innerHTML + url.host
+            listItem.appendChild(removedListItem)
+            list.appendChild(listItem)
         })
         // html addition
     } catch (error) {
@@ -72,7 +85,7 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
         removedListItem.addEventListener(
             'click',
             function (){
-                handleRemove(score.id, score.condition.urlFilter)
+                handleRemove(score.id)
             }
         )
         removedListItem.innerHTML = "remove"
@@ -82,12 +95,12 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
     });
 })
 
-function handleRemove(id, dest) {
+function handleRemove(id) {
     //document.getElementById(id)
     chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds: [id] 
     }).then(() => {
         //console.log("attempting to reload link")
-        //location.href = dest
+        location.reload()
     })
 }
