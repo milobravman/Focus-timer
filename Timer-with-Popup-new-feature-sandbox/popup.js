@@ -7,6 +7,15 @@
 // getting an alarm info if one has already been set
 
 
+document.getElementById('to-options-page').addEventListener('click', handleOptions)
+
+function handleOptions() {
+    chrome.tabs.create({
+        url: "/options.html"
+      })
+}
+
+
 document.getElementById('block-button').addEventListener('click', handlePageBlock)
 
 const urlParser = /^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/
