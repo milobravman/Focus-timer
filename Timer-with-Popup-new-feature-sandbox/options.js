@@ -101,6 +101,9 @@ function handleRemove(id) {
         removeRuleIds: [id] 
     }).then(() => {
         //console.log("attempting to reload link")
-        location.reload()
+        let toRemove = document.getElementById(id)
+        toRemove.parentElement.remove()
+
+
     })
 }
