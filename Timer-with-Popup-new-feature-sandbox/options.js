@@ -4,20 +4,27 @@
 document.getElementById('submit-block-input').addEventListener('click', handleSubmitBlock)
 
 
-const urlParser = /^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/
 
 
 function handleSubmitBlock() {
-    let url = document.getElementById('block-input').value 
-    console.log(url)
+    try {
+        let url = new URL(document.getElementById('block-input').value)
+        let newRule = {};
+        chrome.declarativeNetRequest.getDynamicRules().then((res) => {
+            
+        })
+    } catch (error) {
+        console.log("not a valid URL")
+        document.getElementById('block-input').value = ''
+        let errorMessage = document.getElementById('block-input-label')
+        errorMessage.innerHTML = 'copy url of site to block, Ex "https://youtube.com"'
+        errorMessage.style.color = 'red'
+        //console.log(errorMessage)
+    }
 
     //check if the url is live
     //check if submitted item is of the form http[s]://www.blah.bla
 
-    let newRule = {};
-    chrome.declarativeNetRequest.getDynamicRules().then((res) => {
-        
-    })
 }
 
 

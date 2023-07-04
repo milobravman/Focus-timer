@@ -18,19 +18,16 @@ function handleOptions() {
 
 document.getElementById('block-button').addEventListener('click', handlePageBlock)
 
-// const urlParser = /^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/
 
 function handlePageBlock() {
     console.log("handle-block Online!!")
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         console.log(tabs[0].id)
-        // console.log(tabs[0].url)
         let newRule = {};
         chrome.declarativeNetRequest.getDynamicRules().then((res) =>{
             console.log(res)
-            // let urlParts = tabs[0].url.match(urlParser)
             let urlParts = new URL(tabs[0].url)
-            let urlDomain = urlParts.host // gets urls in https:/www.name.com and cuts off anything more
+            let urlDomain = urlParts.host
             newRule.id = res.length+1
             newRule.priority = 1
             newRule.action = {
@@ -45,7 +42,6 @@ function handlePageBlock() {
             }
             chrome.declarativeNetRequest.updateDynamicRules({
                 addRules:[newRule]
-                //removeRuleIds: [1,2,3,4,5,6,7, 8] //currently my only way to unblock
             })
         })
         console.log(tabs[0].id)
