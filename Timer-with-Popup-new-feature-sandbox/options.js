@@ -1,6 +1,25 @@
 // display the blocked list for  the user
 
  
+document.getElementById('submit-block-input').addEventListener('click', handleSubmitBlock)
+
+
+const urlParser = /^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/
+
+
+function handleSubmitBlock() {
+    let url = document.getElementById('block-input').value 
+    console.log(url)
+
+    //check if the url is live
+    //check if submitted item is of the form http[s]://www.blah.bla
+
+    let newRule = {};
+    chrome.declarativeNetRequest.getDynamicRules().then((res) => {
+        
+    })
+}
+
 
 document.getElementById('add-to-block-list').addEventListener("click", handleShowAddtoBlock)
 
