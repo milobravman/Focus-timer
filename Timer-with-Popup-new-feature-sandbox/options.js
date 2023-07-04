@@ -2,7 +2,7 @@
 
  
 
-documentnt.getElementById('add-to-block-list').addEventListener("click", handleAddtoBlock)
+document.getElementById('add-to-block-list').addEventListener("click", handleAddtoBlock)
 
 const myReg = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/
 const list = document.getElementById("block-list")
