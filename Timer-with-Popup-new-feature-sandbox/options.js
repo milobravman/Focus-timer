@@ -2,7 +2,15 @@
 
  
 
-document.getElementById('add-to-block-list').addEventListener("click", handleAddtoBlock)
+document.getElementById('add-to-block-list').addEventListener("click", handleShowAddtoBlock)
+
+function handleShowAddtoBlock() {
+    let hidden = document.getElementsByClassName('b-i')
+    for (let i = 0; i< hidden.length; i++) {
+        hidden[i].style.display="inline";
+    }
+    document.getElementById('add-to-block-list').style.display='none'
+}
 
 const myReg = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/
 const list = document.getElementById("block-list")
