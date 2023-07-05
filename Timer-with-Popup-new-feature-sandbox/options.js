@@ -1,5 +1,7 @@
 // display the blocked list for  the user
  
+const list = document.getElementById("block-list")
+
 document.getElementById('submit-block-input').addEventListener('click', handleSubmitBlock)
 
 document.getElementById('add-to-block-list').addEventListener("click", handleShowAddtoBlock)
@@ -7,7 +9,6 @@ document.getElementById('add-to-block-list').addEventListener("click", handleSho
 // it may be poor practice to have two different functions make rules since this and the function in popup.js
 // the other option would be to make these functions send messages to the service worker, background.js and have the rules made there
 // the downside would be like likely increase in time it would take for a rule to be added since there would be the extra step involved
-
 function handleSubmitBlock() {
     try {
         let url = new URL(document.getElementById('block-input').value)
@@ -57,6 +58,7 @@ function handleSubmitBlock() {
     }
 }
 
+// Real time dom manipulation
 function handleShowAddtoBlock() {
     let hidden = document.getElementsByClassName('b-i')
     for (let i = 0; i< hidden.length; i++) {
@@ -65,8 +67,18 @@ function handleShowAddtoBlock() {
     document.getElementById('add-to-block-list').style.display='none'
 }
 
-const list = document.getElementById("block-list")
+//deletes a rule
+function handleRemove(id) {
+    chrome.declarativeNetRequest.updateDynamicRules({
+        removeRuleIds: [id] 
+    }).then(() => {
+        let toRemove = document.getElementById(id)
+        toRemove.parentElement.remove()
+    })
+}
 
+//Populates the page with the blocked websites
+//Not wrapped in a function since I want it called every time the page loads
 chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
     res.forEach((score) => {
         console.log(score);
@@ -86,12 +98,3 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
         list.appendChild(listItem)
     });
 })
-
-function handleRemove(id) {
-    chrome.declarativeNetRequest.updateDynamicRules({
-        removeRuleIds: [id] 
-    }).then(() => {
-        let toRemove = document.getElementById(id)
-        toRemove.parentElement.remove()
-    })
-}
