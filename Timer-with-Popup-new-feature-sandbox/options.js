@@ -1,10 +1,8 @@
 // display the blocked list for  the user
-
  
 document.getElementById('submit-block-input').addEventListener('click', handleSubmitBlock)
 
-
-
+document.getElementById('add-to-block-list').addEventListener("click", handleShowAddtoBlock)
 
 function handleSubmitBlock() {
     try {
@@ -59,9 +57,6 @@ function handleSubmitBlock() {
 
 }
 
-
-document.getElementById('add-to-block-list').addEventListener("click", handleShowAddtoBlock)
-
 function handleShowAddtoBlock() {
     let hidden = document.getElementsByClassName('b-i')
     for (let i = 0; i< hidden.length; i++) {
@@ -74,11 +69,10 @@ const myReg = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/
 const list = document.getElementById("block-list")
 
 chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
-    //console.log(res)
     res.forEach((score) => {
         console.log(score);
         let temp = score.condition.urlFilter.match(myReg)
-        //console.log(temp[1])
+        // let url = new URL(score.condition.urlFilter)
         let listItem = document.createElement("li")
         let removedListItem = document.createElement('button')
         removedListItem.id = score.id;
@@ -90,20 +84,17 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
         )
         removedListItem.innerHTML = "remove"
         listItem.innerHTML=listItem.innerHTML + temp[1]
+        //listItem.innerHTML=listItem.innerHTML + url.host
         listItem.appendChild(removedListItem)
         list.appendChild(listItem)
     });
 })
 
 function handleRemove(id) {
-    //document.getElementById(id)
     chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds: [id] 
     }).then(() => {
-        //console.log("attempting to reload link")
         let toRemove = document.getElementById(id)
         toRemove.parentElement.remove()
-
-
     })
 }
