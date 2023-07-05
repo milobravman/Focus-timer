@@ -34,7 +34,7 @@ function makeAlarm(time) {
 }
 
 // adds a listener for when the alarm goes off
-// send data to other parts of the extention when it fires
+// send data to other parts of the extension when it fires
 try {
 	chrome.alarms.onAlarm.addListener(() => {
 		chrome.storage.local.get(["key"]).then((result) => {
@@ -62,7 +62,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 
 	// this second case handles getting the turning of the timer if the user fails
 	}else if (message === "the user failed"){
-		console.log("inside the stoping the alarm case")
+		console.log("inside the stopping the alarm case")
 		chrome.alarms.clearAll()
 		chrome.storage.local.set({stop: null})
 		chrome.action.setBadgeText({text: "OFF",});

@@ -39,7 +39,7 @@ checkExisting()
 // creates a new tab at the options.html
 function handleOptions() {
     chrome.tabs.create({
-        url: "/options.html"
+        url: "/options/options.html"
     })
 }
     
@@ -62,7 +62,7 @@ function handlePageBlock() {
             newRule.action = {
                 "type": "redirect",
                 "redirect": {
-                  "extensionPath": "/index.html"
+                  "extensionPath": "/blocked-page/index.html"
                 }
               }
             newRule.condition = {

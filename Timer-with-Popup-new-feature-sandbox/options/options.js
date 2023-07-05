@@ -23,7 +23,7 @@ function handleSubmitBlock() {
             newRule.action = {
                 "type": "redirect",
                 "redirect": {
-                  "extensionPath": "/index.html"
+                  "extensionPath": "/blocked-page/index.html"
                 }
               }
             newRule.condition = {
