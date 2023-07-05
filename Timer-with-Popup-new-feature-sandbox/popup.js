@@ -12,6 +12,27 @@ const startTimer = document.getElementById('startTimer');
 const goToPageTwo = document.getElementById('page-2-button')
 const goToPageOne = document.getElementById("page-1-button")
 
+// begins a sequence of functions that 
+// taking in user input
+// run some verifications
+// send data to other parts of the extension
+// create a real time counter
+startTimer.addEventListener(
+    'click',
+    wrapper
+    )
+
+
+goToPageTwo.addEventListener(
+    'click',
+    makePage2Visible
+    )
+
+goToPageOne.addEventListener(
+    'click',
+    makePage1Visible
+    )
+
 checkAccessiblePage()
 checkExisting()
 
@@ -81,26 +102,8 @@ function checkAccessiblePage () {
       });
 }
 
-// begins a sequence of functions that 
-// taking in user input
-// run some verifications
-// send data to other parts of the extension
-// create a real time counter
-startTimer.addEventListener(
-    'click',
-    handleCLick
-    )
-function handleCLick() {
-    wrapper()
-    document.getElementById("timer-input").style.display = "none";
-    document.getElementById("startTimer").style.display = "none";
-}
-    
-goToPageTwo.addEventListener(
-    'click',
-    makePage2Visible
-)
 
+//html style swapping
 function makePage2Visible() {
 
     let pageOneElements = document.getElementsByClassName("page-1")
@@ -115,11 +118,7 @@ function makePage2Visible() {
 
 }
 
-goToPageOne.addEventListener(
-    'click',
-    makePage1Visible
-)
-
+//html style swapping
 function makePage1Visible() {
     let pageOneElements = document.getElementsByClassName("page-1")
     for (let i = 0; i< pageOneElements.length; i++) {
@@ -131,9 +130,9 @@ function makePage1Visible() {
         pageTwoElements[i].style.display="none";
     }
 }
-        
 
-
+// checks local storage to see if alarm exist
+// this way users can see the timer in real time if they wish
 function checkExisting() {
     chrome.storage.local.get(["stop"]).then((result) => {
         if (Number.isSafeInteger(result.stop))// this is checks if a alarm exists
@@ -148,10 +147,10 @@ function checkExisting() {
     })
 }
 
-
 // gets the current open tab
 function wrapper() {
-    console.log("wrapper firing")
+    document.getElementById("timer-input").style.display = "none";
+    document.getElementById("startTimer").style.display = "none";
     const getTab = new Promise((resolve, reject) => {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
             console.log("hi")
@@ -182,7 +181,6 @@ function sendTime(time, id) {
     sending
     timeWrapper(time)
 }
-
 
 // creates a realtime counter that shows up in popup.html
 function timeWrapper(time) {
