@@ -66,7 +66,7 @@ function handlePageBlock() {
                 }
               }
             newRule.condition = {
-                "urlFilter": urlParts.host,
+                "urlFilter": urlParts.origin,
                 "resourceTypes": ["main_frame"]
             }
             chrome.declarativeNetRequest.updateDynamicRules({

@@ -4,6 +4,10 @@ document.getElementById('submit-block-input').addEventListener('click', handleSu
 
 document.getElementById('add-to-block-list').addEventListener("click", handleShowAddtoBlock)
 
+// it may be poor practice to have two different functions make rules since this and the function in popup.js
+// the other option would be to make these functions send messages to the service worker, background.js and have the rules made there
+// the downside would be like likely increase in time it would take for a rule to be added since there would be the extra step involved
+
 function handleSubmitBlock() {
     try {
         let url = new URL(document.getElementById('block-input').value)
@@ -22,7 +26,7 @@ function handleSubmitBlock() {
                 }
               }
             newRule.condition = {
-                "urlFilter": url.host,
+                "urlFilter": url.origin,
                 "resourceTypes": ["main_frame"]
             }
             chrome.declarativeNetRequest.updateDynamicRules({
@@ -51,10 +55,6 @@ function handleSubmitBlock() {
         errorMessage.style.color = 'red'
         //console.log(errorMessage)
     }
-
-    //check if the url is live
-    //check if submitted item is of the form http[s]://www.blah.bla
-
 }
 
 function handleShowAddtoBlock() {
@@ -65,14 +65,12 @@ function handleShowAddtoBlock() {
     document.getElementById('add-to-block-list').style.display='none'
 }
 
-const myReg = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/
 const list = document.getElementById("block-list")
 
 chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
     res.forEach((score) => {
         console.log(score);
-        let temp = score.condition.urlFilter.match(myReg)
-        // let url = new URL(score.condition.urlFilter)
+        let url = new URL(score.condition.urlFilter)
         let listItem = document.createElement("li")
         let removedListItem = document.createElement('button')
         removedListItem.id = score.id;
@@ -83,8 +81,7 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
             }
         )
         removedListItem.innerHTML = "remove"
-        listItem.innerHTML=listItem.innerHTML + temp[1]
-        //listItem.innerHTML=listItem.innerHTML + url.host
+        listItem.innerHTML=listItem.innerHTML + url.host
         listItem.appendChild(removedListItem)
         list.appendChild(listItem)
     });
