@@ -10,8 +10,9 @@ document.getElementById('add-to-block-list').addEventListener("click", handleSho
 // the other option would be to make these functions send messages to the service worker, background.js and have the rules made there
 // the downside would be like likely increase in time it would take for a rule to be added since there would be the extra step involved
 function handleSubmitBlock() {
+    let input = document.getElementById('block-input')
     try {
-        let url = new URL(document.getElementById('block-input').value)
+        let url = new URL(input.value)
         let newRule = {};
         chrome.declarativeNetRequest.getDynamicRules().then((res) => {
             let newID = 0
@@ -46,11 +47,12 @@ function handleSubmitBlock() {
             listItem.innerHTML=listItem.innerHTML + url.host
             listItem.appendChild(removedListItem)
             list.appendChild(listItem)
+            input.value = ''
         })
         // html addition
     } catch (error) {
         console.log("not a valid URL")
-        document.getElementById('block-input').value = ''
+        input.value = ''
         let errorMessage = document.getElementById('block-input-label')
         errorMessage.innerHTML = 'copy url of site to block, Ex "https://youtube.com"'
         errorMessage.style.color = 'red'
