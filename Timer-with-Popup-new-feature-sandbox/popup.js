@@ -1,31 +1,36 @@
-// Popup.js is responsible for 
-
-// talking in user input and sending it to the background.js
-
-// having a realtime counter that is close to what the alarm is set for
-
-// getting an alarm info if one has already been set
-
+/* Popup.js 
+handles the functionality of the popup page which includes
+Setting a timer
+Changing pages
+Blocking websites
+*/
 
 document.getElementById('to-options-page').addEventListener('click', handleOptions)
+document.getElementById('block-button').addEventListener('click', handlePageBlock)
 
+const startTimer = document.getElementById('startTimer');
+const goToPageTwo = document.getElementById('page-2-button')
+const goToPageOne = document.getElementById("page-1-button")
+
+checkAccessiblePage()
+checkExisting()
+
+// creates a new tab at the options.html
 function handleOptions() {
     chrome.tabs.create({
         url: "/options.html"
       })
-}
-
-
-document.getElementById('block-button').addEventListener('click', handlePageBlock)
-
-
+    }
+    
+// get the active tab and get the url
+// then add it to the dynamic rules
+// then refresh or redirect form the page
 function handlePageBlock() {
-    console.log("handle-block Online!!")
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-        console.log(tabs[0].id)
+        //console.log(tabs[0].id)
         let newRule = {};
         chrome.declarativeNetRequest.getDynamicRules().then((res) =>{
-            console.log(res)
+            //console.log(res)
             let urlParts = new URL(tabs[0].url)
             let newID = 0
             res.forEach((rule) => {
@@ -57,28 +62,13 @@ function handlePageBlock() {
                 }
             )
         })
-        console.log(tabs[0].id)
-
-        // if (tabs[0].id !=undefined){
-        //     console.log("the tabid is "+tabs[0].id)
-        //     chrome.scripting.executeScript({
-        //         files:["/scripts/refresh.js"],
-        //         target:{tabId: tabs[0].id}
-        //       })
-        // }
       });
-    // get the active tab and get the url
-    // then add it to the dynamic rules
-    // then refresh or redirect form the page
 }
-
-
 
 // check accessible url. this will check to see if this is a sight that the extension can access and block any features if not
 function checkAccessiblePage () {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         if (tabs[0].url === undefined){
-            console.log("extension not available on this page")
             let page = document.getElementsByTagName('div')
             for (let i = 0; i< page.length; i++) {
                 page[i].innerHTML=""
@@ -91,28 +81,20 @@ function checkAccessiblePage () {
       });
 }
 
-checkAccessiblePage()
-
-
-const startTimer = document.getElementById('startTimer');
+// begins a sequence of functions that 
+// taking in user input
+// run some verifications
+// send data to other parts of the extension
+// create a real time counter
 startTimer.addEventListener(
     'click',
     handleCLick
     )
-    // begins a sequence of functions that 
-    // taking in user input
-    // run some verifications
-    // send data to other parts of the extension
-    // create a real time counter
 function handleCLick() {
     wrapper()
     document.getElementById("timer-input").style.display = "none";
     document.getElementById("startTimer").style.display = "none";
 }
-    
-
-
-const goToPageTwo = document.getElementById('page-2-button')
     
 goToPageTwo.addEventListener(
     'click',
@@ -133,7 +115,6 @@ function makePage2Visible() {
 
 }
 
-const goToPageOne = document.getElementById("page-1-button")
 goToPageOne.addEventListener(
     'click',
     makePage1Visible
@@ -151,7 +132,7 @@ function makePage1Visible() {
     }
 }
         
-checkExisting()
+
 
 function checkExisting() {
     chrome.storage.local.get(["stop"]).then((result) => {
