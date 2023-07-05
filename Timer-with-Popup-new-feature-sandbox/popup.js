@@ -102,10 +102,8 @@ function checkAccessiblePage () {
       });
 }
 
-
 //html style swapping
 function makePage2Visible() {
-
     let pageOneElements = document.getElementsByClassName("page-1")
     for (let i = 0; i< pageOneElements.length; i++) {
         pageOneElements[i].style.display="none";
@@ -115,7 +113,6 @@ function makePage2Visible() {
     for (let i = 0; i< pageTwoElements.length; i++) {
         pageTwoElements[i].style.display="inline";
     }
-
 }
 
 //html style swapping
@@ -131,21 +128,6 @@ function makePage1Visible() {
     }
 }
 
-// checks local storage to see if alarm exist
-// this way users can see the timer in real time if they wish
-function checkExisting() {
-    chrome.storage.local.get(["stop"]).then((result) => {
-        if (Number.isSafeInteger(result.stop))// this is checks if a alarm exists
-        {  
-            let timeLeft = result.stop - Date.now()
-            if (timeLeft > 0) {
-                document.getElementById("timer-input").style.display = "none";
-                document.getElementById("startTimer").style.display = "none";
-                timeWrapper(timeLeft/60_000)
-            }
-        }
-    })
-}
 
 // gets the current open tab
 function wrapper() {
@@ -164,22 +146,20 @@ function wrapper() {
     })    
 }
 
-// gets the user inputted value 
-function getTime(id) {    
-    let time = parseInt(document.getElementById('timer-input').value)
-    if (Number.isSafeInteger(time)){
-        sendTime(time , id)
-    }
-}
-
-// sends the TabID and the time in minutes to the background.js
-function sendTime(time, id) {
-    const message = {}
-    message.tabId = id
-    message.time = time
-    const sending = chrome.runtime.sendMessage(message)
-    sending
-    timeWrapper(time)
+// checks local storage to see if alarm exist
+// this way users can see the timer in real time if they wish
+function checkExisting() {
+    chrome.storage.local.get(["stop"]).then((result) => {
+        if (Number.isSafeInteger(result.stop))// this is checks if a alarm exists
+        {  
+            let timeLeft = result.stop - Date.now() // because date is tract in ms the current date is always smaller than a future date until 2038 
+            if (timeLeft > 0) {
+                document.getElementById("timer-input").style.display = "none";
+                document.getElementById("startTimer").style.display = "none";
+                timeWrapper(timeLeft/60_000)
+            }
+        }
+    })
 }
 
 // creates a realtime counter that shows up in popup.html
@@ -228,4 +208,22 @@ function timeWrapper(time) {
         let p_time = hours + ":" + mins+ ":" + sec
         countDown.innerHTML = p_time
     }
+}
+
+// gets the user inputted value 
+function getTime(id) {    
+    let time = parseInt(document.getElementById('timer-input').value)
+    if (Number.isSafeInteger(time)){
+        sendTime(time , id)
+    }
+}
+
+// sends the TabID and the time in minutes to the background.js
+function sendTime(time, id) {
+    const message = {}
+    message.tabId = id
+    message.time = time
+    const sending = chrome.runtime.sendMessage(message)
+    sending
+    timeWrapper(time)
 }

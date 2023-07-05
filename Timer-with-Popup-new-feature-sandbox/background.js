@@ -20,32 +20,6 @@ chrome.runtime.onInstalled.addListener(() =>{
   });
 });
 
-// chrome.declarativeNetRequest.updateDynamicRules({
-//   addRules:[{
-//     'id': 1,
-//     "priority": 1,
-//     "action": { "type": "block" },
-//     "condition": {
-//       "urlFilter": "||twitter.com",
-//       "resourceTypes": ["main_frame"]
-//     }
-//   }],
-//   removeRuleIds: [1] //seems like this prevent trying to add this rule multiple times 
-// })
-
-// using webRequest might be replaced with declarativeNetRequest 
-// I will need to test my app without the code below and the WebRequest permission removed or likely suffer from my extension being rejected at least once  
-// chrome.webRequest.onBeforeRequest.addListener(
-//     (obj) =>{
-//     console.log(obj)
-//   },
-//   // filters
-//   {
-//     urls: ["https://www.theringer.com/"]
-//   },
-//   // extraInfoSpec
-// )
-
 // holds the tab_ID this probably should be deleted at some point and the tab_ID should be full handled by the storage API
 let tab_Id
 
@@ -58,7 +32,6 @@ function makeAlarm(time) {
   });
   chrome.storage.local.set({stop: now})
 }
-
 
 // adds a listener for when the alarm goes off
 // send data to other parts of the extention when it fires
@@ -74,12 +47,7 @@ try {
   console.log(error)
 }
 
-
-// handles all incoming data from other parts of the extetion
-
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
-
   // this first case handles the making of a new timer
   if(message.tabId !=null){
     tab_Id = message.tabId
