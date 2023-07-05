@@ -17,7 +17,29 @@
     <button class="b-i" id="submit-block-input" style="display: none;">submit</button>
 </div>
 <div id="restriction options">
-    websites restricted
+    <h3>websites restricted</h3>
+    <ul id="restricted-list">
+
+    </ul>
+    <label class="b-i" for="block-input" >copy url of site to restrict</label>
+    <input id="restrict-input-url" type="text" >
+    <label id='restrict' for="restrict-input-time-using" >how long should the site be allowed</label>
+    <input id="restrict-input-time-using" type='text' list='suggestedTimesUsing'>
+    <datalist id='suggestedTimesUsing'>
+        <option value='10'>
+        <option value='15'>
+        <option value='25'>
+        <option value='40'>
+    </datalist>
+    <label id='cooldown' for="restrict-input-time-cooldown">how long should the site cooldown for</label>
+    <input id="restrict-input-time-cooldown" type='text' list='suggestedTimesCooldown'>
+    <datalist id='suggestedTimesCooldown'>
+        <option value='60'>
+        <option value='90'>
+        <option value='120'>
+        <option value='720'>
+    </datalist>
+    <button id="submit-restrict-input" >submit</button>
 </div>
     <script src="./options.js" type="module"></script>
 </body>

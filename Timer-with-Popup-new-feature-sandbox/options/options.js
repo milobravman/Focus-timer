@@ -6,6 +6,7 @@ document.getElementById('submit-block-input').addEventListener('click', handleSu
 
 document.getElementById('add-to-block-list').addEventListener("click", handleShowAddToBlock)
 
+
 // it may be poor practice to have two different functions make rules since this and the function in popup.js
 // the other option would be to make these functions send messages to the service worker, background.js and have the rules made there
 // the downside would be like likely increase in time it would take for a rule to be added since there would be the extra step involved
@@ -100,3 +101,33 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
         list.appendChild(listItem)
     });
 })
+
+/*
+How it could work
+User goes to restricted page
+Timer starts counting to the limit
+If the limit is reached
+The blocking rule is added
+A timestamp is created for when this rule should be automatically removed
+When the service worker loads it needs to check if there are any restricted websites actively blocked and if the should be unblocked
+If the use leaves the page before the limit is reached
+The time resets
+This opens a loophole of leaving and coming back to the page
+so maybe the # of visits to a restricted page should also call for blocking
+*/
+
+document
+    .getElementById("submit-restrict-input")
+    .addEventListener("click", handleSubmitRestrict)
+
+function handleSubmitRestrict() {
+    let url = document
+        .getElementById("restrict-input-url").value
+    let timeToAllow = document
+        .getElementById("restrict-input-time-using").value
+    let timeToBlock = document
+        .getElementById("restrict-input-time-cooldown").value
+    console.log(url);
+    console.log(timeToAllow);
+    console.log(timeToBlock);
+}
