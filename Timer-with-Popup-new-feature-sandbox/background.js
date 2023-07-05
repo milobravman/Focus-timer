@@ -39,7 +39,7 @@ try {
 	chrome.alarms.onAlarm.addListener(() => {
 		chrome.storage.local.get(["key"]).then((result) => {
 			//console.log("the value of key is" + result.key)
-			chrome.tabs.sendMessage(result.key, "test-from-the-backround")
+			chrome.tabs.sendMessage(result.key, "test-from-the-background")
 		})
 		chrome.action.setBadgeText({text: "OFF",});
 	});  

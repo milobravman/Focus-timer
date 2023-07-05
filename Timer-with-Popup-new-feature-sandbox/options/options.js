@@ -4,7 +4,7 @@ const list = document.getElementById("block-list")
 
 document.getElementById('submit-block-input').addEventListener('click', handleSubmitBlock)
 
-document.getElementById('add-to-block-list').addEventListener("click", handleShowAddtoBlock)
+document.getElementById('add-to-block-list').addEventListener("click", handleShowAddToBlock)
 
 // it may be poor practice to have two different functions make rules since this and the function in popup.js
 // the other option would be to make these functions send messages to the service worker, background.js and have the rules made there
@@ -61,7 +61,7 @@ function handleSubmitBlock() {
 }
 
 // Real time dom manipulation
-function handleShowAddtoBlock() {
+function handleShowAddToBlock() {
     let hidden = document.getElementsByClassName('b-i')
     for (let i = 0; i< hidden.length; i++) {
         hidden[i].style.display="inline";
