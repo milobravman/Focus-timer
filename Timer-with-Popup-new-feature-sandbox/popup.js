@@ -40,8 +40,8 @@ checkExisting()
 function handleOptions() {
     chrome.tabs.create({
         url: "/options.html"
-      })
-    }
+    })
+}
     
 // get the active tab and get the url
 // then add it to the dynamic rules
