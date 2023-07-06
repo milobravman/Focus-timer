@@ -7,6 +7,15 @@
 // injecting the script into the tab the user wants to focus on
 
 
+// Starting the website restriction feature
+chrome.webNavigation.onCompleted.addListener((e) =>{
+	if (e.frameType === 'outermost_frame'){
+		console.log(e)
+	}
+},
+
+)
+
 // these create icon text that signifies to user the timer has not been set
 chrome.runtime.onStartup.addListener(() =>{
 	chrome.action.setBadgeText({

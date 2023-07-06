@@ -121,13 +121,20 @@ document
     .addEventListener("click", handleSubmitRestrict)
 
 function handleSubmitRestrict() {
-    let url = document
-        .getElementById("restrict-input-url").value
+
+    // console.log(url);
+    // console.log(timeToAllow);
+    // console.log(timeToBlock);
+
+    try {
+    let url = new URL(document
+        .getElementById("restrict-input-url").value)
     let timeToAllow = document
         .getElementById("restrict-input-time-using").value
     let timeToBlock = document
         .getElementById("restrict-input-time-cooldown").value
-    console.log(url);
-    console.log(timeToAllow);
-    console.log(timeToBlock);
+    
+    } catch (error) {
+        console.log('nope');
+    }
 }

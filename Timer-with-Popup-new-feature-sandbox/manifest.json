@@ -18,7 +18,13 @@
         "128": "images/icon-128.png"
       }
     },
-  "permissions": ["scripting", "alarms","storage","declarativeNetRequest", "declarativeNetRequestFeedback"],
+  "permissions": [
+     "scripting",
+     "alarms",
+     "storage",
+     "declarativeNetRequest",
+     "webNavigation"
+    ],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background-wrapper.js"
