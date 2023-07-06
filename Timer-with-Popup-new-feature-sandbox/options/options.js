@@ -55,7 +55,7 @@ function handleSubmitBlock() {
         console.log("not a valid URL")
         input.value = ''
         let errorMessage = document.getElementById('block-input-label')
-        errorMessage.innerHTML = 'copy url of site to block, Ex "https://youtube.com"'
+        errorMessage.innerHTML = 'copy url of site to block, Ex "https://www.youtube.com"'
         errorMessage.style.color = 'red'
         //console.log(errorMessage)
     }
@@ -118,14 +118,11 @@ so maybe the # of visits to a restricted page should also call for blocking
 
 document
     .getElementById("submit-restrict-input")
-    .addEventListener("click", handleSubmitRestrict)
+    .addEventListener("click", checkValidURL)
 
-function handleSubmitRestrict() {
+// handle Submit Restrict functions
 
-    // console.log(url);
-    // console.log(timeToAllow);
-    // console.log(timeToBlock);
-
+function checkValidURL() {
     try {
     let url = new URL(document
         .getElementById("restrict-input-url").value)
@@ -133,8 +130,21 @@ function handleSubmitRestrict() {
         .getElementById("restrict-input-time-using").value
     let timeToBlock = document
         .getElementById("restrict-input-time-cooldown").value
-    
+    addToLocalStorage(url, timeToAllow, timeToBlock)
     } catch (error) {
         console.log('nope');
+        // add error message for user
     }
+}
+
+function addToLocalStorage(url, timeA, timeB) {
+    let existing = []
+    chrome.storage.local.get("rules").then((res) => {
+        console.log(res)
+    })
+    chrome.storage.local.set({rules: [{
+        url: url.origin,
+        timeSiteAllowed: timeA,
+        timeSiteBlocked: timeB
+    }]})
 }
