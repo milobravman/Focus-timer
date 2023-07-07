@@ -1,12 +1,8 @@
 /* Popup.js 
 handles the functionality of the popup page which includes
 Setting a timer
-Changing pages
-Blocking websites
 */
 
-document.getElementById('to-options-page').addEventListener('click', handleOptions)
-document.getElementById('block-button').addEventListener('click', handlePageBlock)
 
 const startTimer = document.getElementById('startTimer');
 const goToPageTwo = document.getElementById('page-2-button')
@@ -20,17 +16,6 @@ const goToPageOne = document.getElementById("page-1-button")
 startTimer.addEventListener(
     'click',
     wrapper
-    )
-
-
-goToPageTwo.addEventListener(
-    'click',
-    makePage2Visible
-    )
-
-goToPageOne.addEventListener(
-    'click',
-    makePage1Visible
     )
 
 checkAccessiblePage()
