@@ -3,73 +3,46 @@ handles the functionality of the popup page which includes
 Setting a timer
 */
 
+checkAccessiblePage() //checks if that is not a //:chrome page
+checkExisting() // checks if a timer exists, slight UI lag I don't know how to fix
+checkDefaultTimer()
+const StartTimer = document.getElementById('startTimer');
+const TimerInput = document.getElementById('timer-input')
+let UserDefault = 10;
 
-const startTimer = document.getElementById('startTimer');
-const goToPageTwo = document.getElementById('page-2-button')
-const goToPageOne = document.getElementById("page-1-button")
+TimerInput.addEventListener(
+    "input",
+    trackDefault
+    )
+
+function trackDefault(e) {
+    // console.log(e.target.value)
+    // console.log(typeof(e.target.value))
+    // let p = parseInt(e.target.value)
+    // console.log(typeof(p))
+    chrome.storage.local.set({timerDefault: parseInt(e.target.value)})
+}
+
+function checkDefaultTimer() {
+    chrome.storage.local.get("timerDefault").then((result) =>{
+        console.log(typeof(result.timerDefault))
+        console.log(Number.isSafeInteger(result.timerDefault))
+        if (Number.isSafeInteger(result.timerDefault)) {
+            console.log("if statement firing")
+            TimerInput.value = result.timerDefault
+        }
+    })
+}
 
 // begins a sequence of functions that 
 // taking in user input
 // run some verifications
 // send data to other parts of the extension
 // create a real time counter
-startTimer.addEventListener(
+StartTimer.addEventListener(
     'click',
     wrapper
     )
-
-checkAccessiblePage()
-checkExisting()
-
-// creates a new tab at the options.html
-function handleOptions() {
-    chrome.tabs.create({
-        url: "/options/options.html"
-    })
-}
-    
-// get the active tab and get the url
-// then add it to the dynamic rules
-// then refresh or redirect form the page
-function handlePageBlock() {
-    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-        //console.log(tabs[0].id)
-        let newRule = {};
-        chrome.declarativeNetRequest.getDynamicRules().then((res) =>{
-            //console.log(res)
-            let urlParts = new URL(tabs[0].url)
-            let newID = 0
-            res.forEach((rule) => {
-                newID = newID + rule.id
-            })
-            newRule.id = newID+1
-            newRule.priority = 1
-            newRule.action = {
-                "type": "redirect",
-                "redirect": {
-                  "extensionPath": "/blocked-page/index.html"
-                }
-              }
-            newRule.condition = {
-                "urlFilter": urlParts.origin,
-                "resourceTypes": ["main_frame"]
-            }
-            chrome.declarativeNetRequest.updateDynamicRules({
-                addRules:[newRule]
-            }).then((res) =>
-                {
-                    if (tabs[0].id !=undefined){
-                        console.log("the tabid is "+tabs[0].id)
-                        chrome.scripting.executeScript({
-                            files:["/scripts/refresh.js"],
-                            target:{tabId: tabs[0].id}
-                          })
-                    }
-                }
-            )
-        })
-      });
-}
 
 // check accessible url. this will check to see if this is a sight that the extension can access and block any features if not
 function checkAccessiblePage () {
@@ -86,33 +59,6 @@ function checkAccessiblePage () {
         } 
       });
 }
-
-//html style swapping
-function makePage2Visible() {
-    let pageOneElements = document.getElementsByClassName("page-1")
-    for (let i = 0; i< pageOneElements.length; i++) {
-        pageOneElements[i].style.display="none";
-    }
-    
-    let pageTwoElements = document.getElementsByClassName("page-2")
-    for (let i = 0; i< pageTwoElements.length; i++) {
-        pageTwoElements[i].style.display="inline";
-    }
-}
-
-//html style swapping
-function makePage1Visible() {
-    let pageOneElements = document.getElementsByClassName("page-1")
-    for (let i = 0; i< pageOneElements.length; i++) {
-        pageOneElements[i].style.display="inline";
-    }
-    
-    let pageTwoElements = document.getElementsByClassName("page-2")
-    for (let i = 0; i< pageTwoElements.length; i++) {
-        pageTwoElements[i].style.display="none";
-    }
-}
-
 
 // gets the current open tab
 function wrapper() {
