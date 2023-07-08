@@ -48,6 +48,9 @@ try {
 	console.log(error)
 }
 
+
+// this function is in need of a rework for readability
+// I have tab_Id .tabId and tabId and there are all different -.-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 	// this first case handles the making of a new timer
 	if(message.tabId !=null){
@@ -60,6 +63,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 			target:{tabId: message.tabId}
 		})
 		chrome.action.setBadgeText({text: "ON",});
+		chrome.tabs.onRemoved.addListener((tabId) => {
+			if (tabId == tab_Id){
+				console.log("holy shit the tab was closed")
+			}
+		})
 
 	// this second case handles getting the turning of the timer if the user fails
 	}else if (message === "the user failed"){
