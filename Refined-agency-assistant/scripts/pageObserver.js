@@ -11,16 +11,28 @@ try {
         'visibilitychange',
         handleVisblityChange
     )
+
+    window.addEventListener(
+        'beforeunload',
+         warnUser
+         );
+
+    function warnUser(event) {
+        event.preventDefault()
+        return (event.returnValue = "huh");
+    }
     
     function handleVisblityChange() {
         myAudioFail.play()
         chrome.runtime.sendMessage("the user failed")
         document.removeEventListener("visibilitychange", handleVisblityChange);
+        window.removeEventListener("beforeunload", warnUser)
     }
     
     chrome.runtime.onMessage.addListener((message) => {
         myAudioPass.play()
         document.removeEventListener("visibilitychange", handleVisblityChange);
+        window.removeEventListener("beforeunload", warnUser)
     })
 } catch (error) {
     console.log(error)

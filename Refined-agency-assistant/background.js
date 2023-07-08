@@ -25,6 +25,7 @@ let tab_Id
 
 // makes the alarm that controls the when use has finished focusing
 // also stores the time when the user should stop in the storage API
+// also monitors the tab and turns off the timer if they close the tab 
 function makeAlarm(time) {
 	let now = Date.now() + (time * 60_000)
 	chrome.alarms.create('demo-default-alarm', {
