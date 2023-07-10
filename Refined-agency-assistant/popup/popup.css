@@ -1,8 +1,47 @@
 #timer-input-container{
-    text-align: center;
 }
+
 h2{
     margin: 0;
+}
+button{
+    background-color: #644131;
+    border: none;
+    color: white;
+    padding: 7px 22px;
+    font-size: 16px;
+    transition-duration: 0.4s
+}
+
+button:hover{
+    background-color: #bf6f4b;
+}
+#submit-button{
+    margin-left: 0%;
+    justify-content: left;
+    display: flex;
+}
+
+#timer-input-label{
+    display: inline-block;
+    text-align: left;
+}
+
+#timer-body-container{
+    width: 177px;
+    margin-left: 10%;
+}
+
+#timer-input{
+    border-radius: 100px;
+    border: 0px solid #609;
+    padding: 10px;
+    height: 10px;
+    width: 50px;
+}
+
+#timer-input:focus{
+    outline-width: thick;
 }
 
 #title{
