@@ -7,6 +7,15 @@ h2{
 
 #title{
     background-color: #6c7194;
+    height: 20%;
+    text-align: center;
+    display: table-cell;
+    width: 220px;
+    height: 30px;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: large;
+    color: #d28aa0;
 }
 
 .center, #startTimer{
@@ -17,6 +26,6 @@ body{
     width: 220px;
     height: 185px;
     margin: 0;
-    background-color: #D28AA0;
+    background-color: #f4c4bd;
 }
 
