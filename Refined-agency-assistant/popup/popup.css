@@ -1,5 +1,12 @@
 #timer-input-container{
-    margin: 4%;
+    text-align: center;
+}
+h2{
+    margin: 0;
+}
+
+#title{
+    background-color: #6c7194;
 }
 
 .center, #startTimer{
@@ -7,7 +14,9 @@
 }
 
 body{
-    width: 193px;
-    height: 115px;
+    width: 220px;
+    height: 185px;
     margin: 0;
+    background-color: #D28AA0;
 }
+
