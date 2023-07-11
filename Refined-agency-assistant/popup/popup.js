@@ -16,10 +16,10 @@ TimerInput.addEventListener(
     )
 
 function trackDefault(e) {
-    // console.log(e.target.value)
-    // console.log(typeof(e.target.value))
-    // let p = parseInt(e.target.value)
-    // console.log(typeof(p))
+    console.log(e.target.value.length)
+    if(e.target.value.length > 3){
+        TimerInput.value = e.target.value.slice(0,3); 
+    }
     chrome.storage.local.set({timerDefault: parseInt(e.target.value)})
 }
 

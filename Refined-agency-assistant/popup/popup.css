@@ -2,6 +2,9 @@
     margin-left: -22%;
 }
 
+#feature-title{
+    margin: 0%;
+}
 
 #startTimer{
     border-radius: 100px;
@@ -39,10 +42,11 @@ button:hover{
 #timer-body-container{
     width: 177px;
     margin-left: 10%;
+    margin-top: 10%;
 }
 
 #timer-input{
-    border-radius: 100px;
+    border-radius: 9px;
     border: 0px solid #609;
     padding: 10px;
     height: 10px;
@@ -57,8 +61,11 @@ button:hover{
     outline-width: thick;
 }
 
+#timer-input:focus + #mins-label{
+    display: none;
+}
+
 #title{
-    background-color: #6c7194;
     height: 20%;
     text-align: center;
     display: table-cell;
@@ -67,7 +74,10 @@ button:hover{
     vertical-align: middle;
     font-weight: bold;
     font-size: large;
-    color: #d28aa0;
+    color: #302225;
+    border-bottom: black;
+    border-bottom-width: 1%;
+    background-color: #b5beff
 }
 
 .center, #startTimer{
@@ -78,6 +88,10 @@ body{
     width: 220px;
     height: 185px;
     margin: 0;
-    background-color: #f4c4bd;
 }
 
+#main-body{
+    background-image: linear-gradient(#F4C4BD,#F4C4BD,#c4788f);
+    margin-bottom: 0;
+    height: 84%
+}
