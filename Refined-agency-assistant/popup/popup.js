@@ -9,6 +9,7 @@ checkDefaultTimer()
 const StartTimer = document.getElementById('startTimer')
 const TimerInput = document.getElementById('timer-input')
 const MinsLabel = document.getElementById('mins-label')
+const InputLabel = document.getElementById('timer-input-label')
 
 let UserDefault = 10;
 
@@ -64,9 +65,10 @@ function checkAccessiblePage () {
 
 // gets the current open tab
 function wrapper() {
-    TimerInput.style.display = "none";
-    StartTimer.style.display = "none";
+    TimerInput.style.display = "none"
+    StartTimer.style.display = "none"
     MinsLabel.style.display = "none"
+    InputLabel.style.display = "none"
     const getTab = new Promise((resolve, reject) => {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
             console.log("hi")
@@ -88,9 +90,10 @@ function checkExisting() {
         {  
             let timeLeft = result.stop - Date.now() // because date is tract in ms the current date is always smaller than a future date until 2038 
             if (timeLeft > 0) {
-                TimerInput.style.display = "none";
-                StartTimer.style.display = "none";
+                TimerInput.style.display = "none"
+                StartTimer.style.display = "none"
                 MinsLabel.style.display = "none"
+                InputLabel.style.display = "none"
                 timeWrapper(timeLeft/60_000)
             }
         }

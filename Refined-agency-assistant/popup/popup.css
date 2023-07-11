@@ -95,3 +95,7 @@ body{
     margin-bottom: 0;
     height: 84%
 }
+
+#count-down{
+    font-size: 35pt;
+}
