@@ -1,4 +1,10 @@
-#timer-input-container{
+#mins-label{
+    margin-left: -22%;
+}
+
+
+#startTimer{
+    border-radius: 100px;
 }
 
 h2{
@@ -16,15 +22,18 @@ button{
 button:hover{
     background-color: #bf6f4b;
 }
-#submit-button{
-    margin-left: 0%;
-    justify-content: left;
+#submit-button-container{
+    margin-top: 9%;
+    justify-content: center;
     display: flex;
 }
 
 #timer-input-label{
     display: inline-block;
     text-align: left;
+    margin-right: 10%;
+    font-size: 10pt;
+    font-weight: 400;
 }
 
 #timer-body-container{
@@ -38,6 +47,10 @@ button:hover{
     padding: 10px;
     height: 10px;
     width: 50px;
+}
+
+#timer-input:hover + #mins-label{
+    display: none;
 }
 
 #timer-input:focus{
