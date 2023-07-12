@@ -3,11 +3,13 @@
 }
 
 #mins-label{
-    margin-left: -14%;
+    margin-left: -15%;
+    font-size: 14px;
 }
 
 #feature-title{
     margin: 0%;
+    font-size: 20px;
 }
 
 #startTimer{
@@ -21,8 +23,8 @@ button{
     background-color: #644131;
     border: none;
     color: white;
-    padding: 7px 22px;
-    font-size: 16px;
+    padding: 10px 33px;
+    font-size: 22px;
     transition-duration: 0.4s
 }
 
@@ -46,14 +48,16 @@ button:hover{
 #timer-body-container{
     width: 330px;
     margin-top: 10%;
+    text-align: inherit;
 }
 
 #timer-input{
     border-radius: 9px;
     border: 0px solid #609;
-    padding: 10px;
+    padding: 14px;
     height: 10px;
-    width: 50px;
+    width: 54px;
+    font-size: 15px;
 }
 
 #timer-input:hover + #mins-label{
@@ -73,10 +77,10 @@ button:hover{
     text-align: center;
     display: table-cell;
     width: 330px;
-    height: 30px;
+    height: 45px;
     vertical-align: middle;
     font-weight: bold;
-    font-size: large;
+    font-size: 23px;
     color: #302225;
     border-bottom: black;
     border-bottom-width: 1%;

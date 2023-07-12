@@ -10,6 +10,7 @@ const StartTimer = document.getElementById('startTimer')
 const TimerInput = document.getElementById('timer-input')
 const MinsLabel = document.getElementById('mins-label')
 const InputLabel = document.getElementById('timer-input-label')
+const TimerBodyContainer = document.getElementById('timer-body-container')
 
 let UserDefault = 10;
 
@@ -69,6 +70,7 @@ function wrapper() {
     StartTimer.style.display = "none"
     MinsLabel.style.display = "none"
     InputLabel.style.display = "none"
+    TimerBodyContainer.style.textAlign = "center"
     const getTab = new Promise((resolve, reject) => {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
             console.log("hi")
@@ -94,6 +96,7 @@ function checkExisting() {
                 StartTimer.style.display = "none"
                 MinsLabel.style.display = "none"
                 InputLabel.style.display = "none"
+                TimerBodyContainer.style.textAlign = "center"
                 timeWrapper(timeLeft/60_000)
             }
         }
