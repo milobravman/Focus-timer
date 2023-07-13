@@ -52,11 +52,11 @@ StartTimer.addEventListener(
 function checkAccessiblePage () {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         if (tabs[0].url === undefined){
-            document.getElementById('main-body').innerHTML="Not available on this page"
-            //const notAvailable = document.createElement("span")
-            //notAvailable.innerHTML ="Not available on this page"
-            //let title = document.getElementsByTagName('div')
-            //document.body.insertBefore(notAvailable, title[0])
+            const mainBody = document.getElementById('main-body')
+            mainBody.innerHTML="Not available on this page"
+            mainBody.style.textAlign = "center"
+            mainBody.style.fontSize = "20px"
+
         } 
       });
 }
