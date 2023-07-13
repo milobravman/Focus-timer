@@ -29,10 +29,10 @@ function trackDefault(e) {
 
 function checkDefaultTimer() {
     chrome.storage.local.get("timerDefault").then((result) =>{
-        console.log(typeof(result.timerDefault))
-        console.log(Number.isSafeInteger(result.timerDefault))
+        //console.log(typeof(result.timerDefault))
+        //console.log(Number.isSafeInteger(result.timerDefault))
         if (Number.isSafeInteger(result.timerDefault)) {
-            console.log("if statement firing")
+            //console.log("if statement firing")
             TimerInput.value = result.timerDefault
         }
     })
@@ -50,14 +50,15 @@ StartTimer.addEventListener(
 
 // check accessible url. this will check to see if this is a sight that the extension can access and block any features if not
 function checkAccessiblePage () {
+    console.log('checkAccess');
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-        if (tabs[0].url === undefined){
+        if (tabs[0].url === undefined || tabs[0].url.slice(0,14) === 'https://chrome'){
             const mainBody = document.getElementById('main-body')
             mainBody.innerHTML="Not available on this page"
             mainBody.style.textAlign = "center"
             mainBody.style.fontSize = "20px"
 
-        } 
+        }
       });
 }
 
