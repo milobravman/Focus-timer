@@ -1,10 +1,28 @@
-#timer-input-container{
-    margin-left: 17%;
+body{
+    width: 330px;
+    height: 277px;
+    margin: 0;
 }
 
-#mins-label{
-    margin-left: -15%;
-    font-size: 14px;
+#title{
+    height: 20%;
+    text-align: center;
+    display: table-cell;
+    width: 330px;
+    height: 45px;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 23px;
+    color: #302225;
+    border-bottom: black;
+    border-bottom-width: 1%;
+    background-color: #b5beff
+}
+
+#main-body{
+    background-image: linear-gradient(#F4C4BD,#F4C4BD,#c4788f);
+    margin-bottom: 0;
+    height: 89%;
 }
 
 #feature-title{
@@ -12,29 +30,14 @@
     font-size: 20px;
 }
 
-#startTimer{
-    border-radius: 100px;
+#timer-body-container{
+    width: 330px;
+    margin-top: 10%;
+    text-align: inherit;
 }
 
-h2{
-    margin: 0;
-}
-button{
-    background-color: #644131;
-    border: none;
-    color: white;
-    padding: 10px 33px;
-    font-size: 22px;
-    transition-duration: 0.4s
-}
-
-button:hover{
-    background-color: #bf6f4b;
-}
-#submit-button-container{
-    margin-top: 9%;
-    justify-content: center;
-    display: flex;
+#timer-input-container{
+    margin-left: 17%;
 }
 
 #timer-input-label{
@@ -43,12 +46,6 @@ button:hover{
     margin-right: 10%;
     font-size: 13pt;
     font-weight: 400;
-}
-
-#timer-body-container{
-    width: 330px;
-    margin-top: 10%;
-    text-align: inherit;
 }
 
 #timer-input{
@@ -72,37 +69,36 @@ button:hover{
     display: none;
 }
 
-#title{
-    height: 20%;
-    text-align: center;
-    display: table-cell;
-    width: 330px;
-    height: 45px;
-    vertical-align: middle;
-    font-weight: bold;
-    font-size: 23px;
-    color: #302225;
-    border-bottom: black;
-    border-bottom-width: 1%;
-    background-color: #b5beff
+#mins-label{
+    margin-left: -15%;
+    font-size: 14px;
+}
+
+#count-down{  
+    font-size: 35pt;
+}
+
+#submit-button-container{
+    margin-top: 9%;
+    justify-content: center;
+    display: flex;
+}
+
+#startTimer{
+    border-radius: 100px;
+    background-color: #644131;
+    border: none;
+    color: white;
+    padding: 10px 33px;
+    font-size: 22px;
+    transition-duration: 0.4s
+}
+
+#startTimer:hover{
+    background-color: #bf6f4b;
 }
 
 .center, #startTimer{
     text-align: center;
 }
 
-body{
-    width: 330px;
-    height: 277px;
-    margin: 0;
-}
-
-#main-body{
-    background-image: linear-gradient(#F4C4BD,#F4C4BD,#c4788f);
-    margin-bottom: 0;
-    height: 89%;
-}
-
-#count-down{
-    font-size: 35pt;
-}
