@@ -7,6 +7,17 @@
 // injecting the script into the tab the user wants to focus on
 
 
+// FireBase Nonsence
+// Testing API CALL
+
+async function logMovies() {
+	const response = await fetch("https://catfact.ninja/fact");
+	const movies = await response.json();
+	console.log(movies);
+}
+
+logMovies()
+
 // Starting the website restriction feature
 chrome.webNavigation.onCompleted.addListener((e) =>{
 	if (e.frameType === 'outermost_frame'){
