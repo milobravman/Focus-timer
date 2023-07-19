@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+  <div id="title">
+    <!-- <h2 class="center">Agency Assistant</h2> -->
+    Agency Assistant
+  </div>
+  <div id="main-body">
+    <h3 id="feature-title" class="center">Focus timer!</h3>
+      <div id='timer-body-container' class="page-1">
+        <div id="timer-input-container">
+          <label id='timer-input-label' for="timer-input">Focus Session</label>
+          <input id="timer-input" type="number" value="10" min="1" max="999">
+          <span id="mins-label">Mins</span>
+        </div>
+        <span id="count-down" style="display: none"></span>
+        <div id="submit-button-container" class="center">
+          <button id ='startTimer'>set</button>
+        </div>
+      </div>
+  </div>
+    <script src="./popup.js" type="module"></script>
+  </body>
+</html>
