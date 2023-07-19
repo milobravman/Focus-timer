@@ -1,6 +1,6 @@
-//this script is responsable for making and firing audio that signifies if the user was succesful in staying focused or not.
+//this script is responsible for making and firing audio that signifies if the user was successful in staying focused or not.
 
-// it also sets up a listenr for if the user is on the page for the durration of the timer and plays a sound signifying succsess.
+// it also sets up a listener for if the user is on the page for the duration of the timer and plays a sound signifying success.
 try {
     let myAudioFail = new Audio(chrome.runtime.getURL("./audio/t-rex-roar.mp3")); //declaring the audio file out here fixes the first-time-pressed issue
     
