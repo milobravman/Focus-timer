@@ -20,6 +20,11 @@ chrome.runtime.onInstalled.addListener(() =>{
 	});
 
 	// I should initialize what needs to be in local storage here
+	chrome.storage.local.set({
+		timerStarted: 0,
+		timersCompleted: 0,
+		timerFocused: 0
+	})
 });
 
 // holds the tab_ID this probably should be deleted at some point and the tab_ID should be full handled by the storage API
