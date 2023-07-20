@@ -25,7 +25,8 @@ chrome.runtime.onInstalled.addListener(() =>{
 		timerStarted: 0,
 		timersCompleted: 0,
 		timeFocused: 0,
-		date: dateInstalled
+		date: dateInstalled,
+		dailyStreak: dateInstalled
 
 	})
 });
@@ -57,6 +58,12 @@ let lengthofTimer
 function makeAlarm(time) {
 	let p = chrome.storage.local.get()
 	console.log(p)
+
+	//let timersStarted
+	chrome.storage.local.get('timerStarted').then((r)=>{
+		console.log(r.timerStarted)
+		chrome.storage.local.set({timerStarted: r.timerStarted+1})
+	})
 	lengthofTimer = time
 	now = Date.now()
 	timerFinishes = Date.now() + (time * 60_000)
