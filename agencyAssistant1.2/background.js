@@ -21,12 +21,13 @@ chrome.runtime.onInstalled.addListener(() =>{
 
 	// I should initialize what needs to be in local storage here
 	const dateInstalled = new Date();
+	console.log(dateInstalled)
 	chrome.storage.local.set({
 		timerStarted: 0,
 		timersCompleted: 0,
 		timeFocused: 0,
-		date: dateInstalled,
-		dailyStreak: dateInstalled
+		date: dateInstalled.toString(), // without the toString the object is not stored properly
+		dailyStreak: dateInstalled.toString()
 
 	})
 });
@@ -56,7 +57,10 @@ let lengthofTimer
 // also stores the time when the user should stop in the storage API
 // also monitors the tab and turns off the timer if they close the tab 
 function makeAlarm(time) {
-	let p = chrome.storage.local.get()
+	let p = chrome.storage.local.get().then((r) => {
+		console.log(r)
+		console.log(r.date)
+	})
 	console.log(p)
 
 	//let timersStarted
