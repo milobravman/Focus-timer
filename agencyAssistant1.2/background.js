@@ -31,9 +31,7 @@ chrome.runtime.onInstalled.addListener(() =>{
 
 	})
 });
-
 // Local storage looks like 
-
 /*
 {
 	key: tabid
@@ -46,8 +44,6 @@ chrome.runtime.onInstalled.addListener(() =>{
 	dailyStreak: the date of the last timer and if the next is within 24 hours and on a new day the user will see some kind of timer streak
 }
 */
-
-
 // holds the tab_ID this probably should be deleted at some point and the tab_ID should be full handled by the storage API
 let tab_Id
 let timerFinishes
@@ -57,15 +53,14 @@ let lengthofTimer
 // also stores the time when the user should stop in the storage API
 // also monitors the tab and turns off the timer if they close the tab 
 function makeAlarm(time) {
-	let p = chrome.storage.local.get().then((r) => {
-		console.log(r)
-		console.log(r.date)
-	})
-	console.log(p)
+	// let p = chrome.storage.local.get().then((r) => {
+	// 	console.log(r)
+	// 	console.log(r.date)
+	// })
+	// console.log(p)
 
 	//let timersStarted
 	chrome.storage.local.get('timerStarted').then((r)=>{
-		console.log(r.timerStarted)
 		chrome.storage.local.set({timerStarted: r.timerStarted+1})
 	})
 	lengthofTimer = time
