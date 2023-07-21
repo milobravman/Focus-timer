@@ -14,6 +14,8 @@ chrome.runtime.onStartup.addListener(() =>{
 	chrome.action.setBadgeText({
 		text: "OFF",
 	});
+
+	// check if the streak if dead
 });
 
 chrome.runtime.onInstalled.addListener(() =>{
@@ -29,7 +31,8 @@ chrome.runtime.onInstalled.addListener(() =>{
 		timersCompleted: 0,
 		timeFocused: 0,
 		date: dateInstalled, // without the toString the object is not stored properly
-		dailyStreak: dateInstalled
+		dailyStreak: 0,
+		SignTimerUsed: 0 // this time determines the beginning of the 24 hour 'day' that the timer is a streak for further explication below  
 
 	})
 });
@@ -44,9 +47,20 @@ let lengthofTimer
 // also monitors the tab and turns off the timer if they close the tab 
 function makeAlarm(time) {
 	// start section that tracks user data 
-	chrome.storage.local.get('timerStarted').then((r)=>{
+	chrome.storage.local.get().then((r)=>{
+		console.log(r)
+		if (r.dailyStreak === 0){
+			console.log("setting daily streak to 1")
+			chrome.storage.local.set({
+				dailyStreak: 1,
+				SignpostTimerUsed: Date.now()
+			})
+		}else{
+
+		}
 		chrome.storage.local.set({timerStarted: r.timerStarted+1})
 	})
+
 
 
 	// start section that sets the timer using chrome alarms
@@ -125,4 +139,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 	date: date of install and could help me see when the local storage is cleared
 	dailyStreak: the date of the last timer and if the next is within 24 hours and on a new day the user will see some kind of timer streak
 }
+*/
+
+// How I'm implementing my streak logic
+/*
+
+I want to be able to implement timer streaks, where the user is encouraged to set at least 1 timer every 24 hours.
+
+The implantation requires a 'signPost' timer that represent the start of a streak. The tricky part is for the streak to continue the user must set a timer 24-48 from the signpost timer. when this happens that new timer become the new signpost timer, and the steak increases.
+
+additionally the user can set any of timers 0-23 hours after the signpost timer and it does not count as a streak but DOES NOT CHANGE THE SIGNPOST.
+
 */

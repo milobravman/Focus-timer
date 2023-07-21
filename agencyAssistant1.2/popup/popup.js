@@ -71,8 +71,8 @@ function wrapper() {
     TimerBodyContainer.style.textAlign = "center"
     const getTab = new Promise((resolve, reject) => {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-            console.log("hi")
-            console.log(tabs[0].url)
+            //console.log("hi")
+            //console.log(tabs[0].url)
             let id = tabs[0].id
             resolve(id)
           });
