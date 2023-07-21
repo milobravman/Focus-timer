@@ -6,6 +6,8 @@
 
 // injecting the script into the tab the user wants to focus on
 
+// Tracking user data, not for data analytics but to try to make the experience more satisfying 
+
 
 // these create icon text that signifies to user the timer has not been set
 chrome.runtime.onStartup.addListener(() =>{
@@ -20,30 +22,18 @@ chrome.runtime.onInstalled.addListener(() =>{
 	});
 
 	// I should initialize what needs to be in local storage here
-	const dateInstalled = new Date();
+	const dateInstalled = Date.now();
 	console.log(dateInstalled)
 	chrome.storage.local.set({
 		timerStarted: 0,
 		timersCompleted: 0,
 		timeFocused: 0,
-		date: dateInstalled.toString(), // without the toString the object is not stored properly
-		dailyStreak: dateInstalled.toString()
+		date: dateInstalled, // without the toString the object is not stored properly
+		dailyStreak: dateInstalled
 
 	})
 });
-// Local storage looks like 
-/*
-{
-	key: tabid
-	stop: time for the alarm to fire (used for display)
-	timerDefault: used to have the timer be what the user uses
-	timeFocused: how log a user has Focused for
-	timersStarted: how many times a user has started a timer
-	timersCompleted: how many times a user has completed a timer
-	date: date of install and could help me see when the local storage is cleared
-	dailyStreak: the date of the last timer and if the next is within 24 hours and on a new day the user will see some kind of timer streak
-}
-*/
+
 // holds the tab_ID this probably should be deleted at some point and the tab_ID should be full handled by the storage API
 let tab_Id
 let timerFinishes
@@ -53,16 +43,13 @@ let lengthofTimer
 // also stores the time when the user should stop in the storage API
 // also monitors the tab and turns off the timer if they close the tab 
 function makeAlarm(time) {
-	// let p = chrome.storage.local.get().then((r) => {
-	// 	console.log(r)
-	// 	console.log(r.date)
-	// })
-	// console.log(p)
-
-	//let timersStarted
+	// start section that tracks user data 
 	chrome.storage.local.get('timerStarted').then((r)=>{
 		chrome.storage.local.set({timerStarted: r.timerStarted+1})
 	})
+
+
+	// start section that sets the timer using chrome alarms
 	lengthofTimer = time
 	now = Date.now()
 	timerFinishes = Date.now() + (time * 60_000)
@@ -125,3 +112,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 		})
 	}
 })
+
+// Local storage looks like 
+/*
+{
+	key: tabid
+	stop: time for the alarm to fire (used for display)
+	timerDefault: used to have the timer be what the user uses
+	timeFocused: how log a user has Focused for
+	timersStarted: how many times a user has started a timer
+	timersCompleted: how many times a user has completed a timer
+	date: date of install and could help me see when the local storage is cleared
+	dailyStreak: the date of the last timer and if the next is within 24 hours and on a new day the user will see some kind of timer streak
+}
+*/
