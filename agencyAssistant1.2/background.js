@@ -32,7 +32,7 @@ chrome.runtime.onInstalled.addListener(() =>{
 		timeFocused: 0,
 		date: dateInstalled, // without the toString the object is not stored properly
 		dailyStreak: 0,
-		SignTimerUsed: 0 // this time determines the beginning of the 24 hour 'day' that the timer is a streak for further explication below  
+		SignpostTimer: 0 // this time determines the beginning of the 24 hour 'day' that the timer is a streak for further explication below  
 
 	})
 });
@@ -53,9 +53,21 @@ function makeAlarm(time) {
 			console.log("setting daily streak to 1")
 			chrome.storage.local.set({
 				dailyStreak: 1,
-				SignpostTimerUsed: Date.now()
+				SignpostTimer: Date.now()
 			})
 		}else{
+			// if the daily streak exists check if the range is 0-23 or 24-48, if its beyond 48 it should already have been cleared
+			const DayinMili = 24*60000
+			let timeSinceSignpostSet= Date.now()-r.SignpostTimer
+			console.log(DayinMili) 
+			console.log(timeSinceSignpostSet)
+			if (DayinMili < timeSinceSignpostSet && timeSinceSignpostSet< 2*DayinMili){
+				chrome.storage.local.set({
+					dailyStreak: r.dailyStreak+1,
+					SignpostTimer: Date.now
+				})
+
+			} // if a streak exists and the user starts a timer within the rage
 
 		}
 		chrome.storage.local.set({timerStarted: r.timerStarted+1})
@@ -104,7 +116,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 			files:["/scripts/pageObserver.js"],
 			target:{tabId: message.tabId}
 		})
-		chrome.action.setBadgeText({text: "ON",});
+		chrome.action.setBadgeText({text: "ON",}); //somehow this is throwing an error sometimes, hard to believe that this is the root cause
 		// not sure what these lines of code below do
 		chrome.tabs.onRemoved.addListener((tabId) => {
 			if (tabId == tab_Id){
