@@ -65,7 +65,7 @@ function makeAlarm(time) {
 			if (five < timeSinceSignpostSet && timeSinceSignpostSet< 2*five){
 				chrome.storage.sync.set({
 					dailyStreak: r.dailyStreak+1,
-					SignpostTimer: Date.now
+					SignpostTimer: Date.now()
 				})
 
 			} // if a streak exists and the user starts a timer within the rage
@@ -73,7 +73,7 @@ function makeAlarm(time) {
 			if (timeSinceSignpostSet > 2*five){
 				chrome.storage.sync.set({
 					dailyStreak: 1,
-					SignpostTimer: Date.now
+					SignpostTimer: Date.now()
 				})
 			}
 
@@ -133,7 +133,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 				console.log("holy shit the tab was closed")
 			}
 		})
-
+		
 	// this second case handles getting the turning of the timer if the user fails
 	}else{ // the user failed
 		console.log("inside the stopping the alarm case")  
