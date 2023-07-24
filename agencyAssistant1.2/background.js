@@ -26,8 +26,8 @@ chrome.runtime.onInstalled.addListener(() =>{
 	// I should initialize what needs to be in local storage here
 	const dateInstalled = Date.now();
 	console.log(dateInstalled)
-	chrome.storage.local.set({
-		timerStarted: 0,
+	chrome.storage.sync.set({
+		timersStarted: 0,
 		timersCompleted: 0,
 		timeFocused: 0,
 		date: dateInstalled, // without the toString the object is not stored properly
@@ -47,11 +47,11 @@ let lengthofTimer
 // also monitors the tab and turns off the timer if they close the tab 
 function makeAlarm(time) {
 	// start section that tracks user data 
-	chrome.storage.local.get().then((r)=>{
+	chrome.storage.sync.get().then((r)=>{
 		console.log(r)
 		if (r.dailyStreak === 0){
 			console.log("setting daily streak to 1")
-			chrome.storage.local.set({
+			chrome.storage.sync.set({
 				dailyStreak: 1,
 				SignpostTimer: Date.now()
 			})
@@ -62,7 +62,7 @@ function makeAlarm(time) {
 			console.log(DayinMili) 
 			console.log(timeSinceSignpostSet)
 			if (DayinMili < timeSinceSignpostSet && timeSinceSignpostSet< 2*DayinMili){
-				chrome.storage.local.set({
+				chrome.storage.sync.set({
 					dailyStreak: r.dailyStreak+1,
 					SignpostTimer: Date.now
 				})
@@ -70,7 +70,7 @@ function makeAlarm(time) {
 			} // if a streak exists and the user starts a timer within the rage
 
 		}
-		chrome.storage.local.set({timerStarted: r.timerStarted+1})
+		chrome.storage.sync.set({timersStarted: r.timersStarted+1})
 	})
 
 
@@ -83,7 +83,7 @@ function makeAlarm(time) {
 	chrome.alarms.create('demo-default-alarm', {
 		when: timerFinishes,
 	});
-	chrome.storage.local.set({stop: timerFinishes})
+	chrome.storage.local.set({stop: timerFinishes}) // this makes sence a local because having this be synced could bug
 }
 
 // adds a listener for when the alarm goes off
