@@ -57,17 +57,25 @@ function makeAlarm(time) {
 			})
 		}else{
 			// if the daily streak exists check if the range is 0-23 or 24-48, if its beyond 48 it should already have been cleared
-			const DayinMili = 24*60000
+			const DayinMili = 24*60_000 // holy fuck I suck at units this is 24 mins not a day
+			const five = 1000*60*5 // 5 minutes
 			let timeSinceSignpostSet= Date.now()-r.SignpostTimer
-			console.log(DayinMili) 
+			//console.log(DayinMili) 
 			console.log(timeSinceSignpostSet)
-			if (DayinMili < timeSinceSignpostSet && timeSinceSignpostSet< 2*DayinMili){
+			if (five < timeSinceSignpostSet && timeSinceSignpostSet< 2*five){
 				chrome.storage.sync.set({
 					dailyStreak: r.dailyStreak+1,
 					SignpostTimer: Date.now
 				})
 
 			} // if a streak exists and the user starts a timer within the rage
+
+			if (timeSinceSignpostSet > 2*five){
+				chrome.storage.sync.set({
+					dailyStreak: 1,
+					SignpostTimer: Date.now
+				})
+			}
 
 		}
 		chrome.storage.sync.set({timersStarted: r.timersStarted+1})
@@ -106,11 +114,11 @@ try {
 // this function is in need of a rework for readability
 // I have tab_Id .tabId and tabId and there are all different -.-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
-	console.log("printing 'message.tabId'"+message.tabId+"if its deffined and i clicked off the tab this is the sorce of a bug")
+	console.log("printing 'message.tabId'"+message.tabId+"if its defined and i clicked off the tab this is the source of a bug")
 	// this first case handles the making of a new timer
 	// this could be refactored into a switch statement. but first I would need to fix the message sent to not need 'message.tabId' and just be 'message != null'
 	if(message.tabId !=null){
-		tab_Id = message.tabId
+		tab_Id = message.tabId // id of the page with the timer
 		chrome.storage.local.set({key: tab_Id})
 		makeAlarm(message.time)
 		sendResponse("response from background.js")
@@ -131,7 +139,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 		console.log("inside the stopping the alarm case")  
 		chrome.alarms.clearAll()
 		chrome.storage.local.set({stop: null})
-		chrome.action.setBadgeText({text: "OFF",});
+		chrome.action.setBadgeText({text: "OFF",})
+
 	// this last case handles sending data to popup.js for the real time timer
 	// this else statement is a relic now. I changed the way of doing this to have popup.js check local storage directly.
 	// So this can be refactored and deleted 7/23/2023 

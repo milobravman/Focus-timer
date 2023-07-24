@@ -158,11 +158,14 @@ function getTime(id) {
 }
 
 // sends the TabID and the time in minutes to the background.js
+// needs to check if it can actually connect to the background.js
 function sendTime(time, id) {
+    console.log("sending message to background.js")
     const message = {}
     message.tabId = id
     message.time = time
     const sending = chrome.runtime.sendMessage(message)
     sending
+
     timeWrapper(time)
 }
