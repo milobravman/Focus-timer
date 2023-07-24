@@ -106,6 +106,7 @@ try {
 // this function is in need of a rework for readability
 // I have tab_Id .tabId and tabId and there are all different -.-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
+	console.log("printing 'message.tabId'"+message.tabId+"if its deffined and i clicked off the tab this is the sorce of a bug")
 	// this first case handles the making of a new timer
 	// this could be refactored into a switch statement. but first I would need to fix the message sent to not need 'message.tabId' and just be 'message != null'
 	if(message.tabId !=null){
@@ -126,7 +127,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 		})
 
 	// this second case handles getting the turning of the timer if the user fails
-	}else if (message === "the user failed"){
+	}else{ // the user failed
 		console.log("inside the stopping the alarm case")  
 		chrome.alarms.clearAll()
 		chrome.storage.local.set({stop: null})
@@ -134,11 +135,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 	// this last case handles sending data to popup.js for the real time timer
 	// this else statement is a relic now. I changed the way of doing this to have popup.js check local storage directly.
 	// So this can be refactored and deleted 7/23/2023 
-	}else{
-		chrome.storage.local.get(["stop"]).then((result) => {
-			console.log(result.stop)
-			sendResponse(result.stop)
-		})
 	}
 })
 
