@@ -107,6 +107,7 @@ try {
 // I have tab_Id .tabId and tabId and there are all different -.-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 	// this first case handles the making of a new timer
+	// this could be refactored into a switch statement. but first I would need to fix the message sent to not need 'message.tabId' and just be 'message != null'
 	if(message.tabId !=null){
 		tab_Id = message.tabId
 		chrome.storage.local.set({key: tab_Id})
@@ -131,6 +132,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 		chrome.storage.local.set({stop: null})
 		chrome.action.setBadgeText({text: "OFF",});
 	// this last case handles sending data to popup.js for the real time timer
+	// this else statement is a relic now. I changed the way of doing this to have popup.js check local storage directly.
+	// So this can be refactored and deleted 7/23/2023 
 	}else{
 		chrome.storage.local.get(["stop"]).then((result) => {
 			console.log(result.stop)
