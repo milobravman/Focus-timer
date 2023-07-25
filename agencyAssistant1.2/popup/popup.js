@@ -153,7 +153,7 @@ function timeWrapper(time) {
 function getTime(id) {    
     let time = parseInt(document.getElementById('timer-input').value)
     if (Number.isSafeInteger(time)){
-        sendTime(time , id)
+        sendTime(time, id)
     }
 }
 

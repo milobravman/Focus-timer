@@ -57,12 +57,12 @@ function makeAlarm(time) {
 			})
 		}else{
 			// if the daily streak exists check if the range is 0-23 or 24-48, if its beyond 48 it should already have been cleared
-			const DayinMili = 24*60_000 // holy fuck I suck at units this is 24 mins not a day
+			const DayinMili = 1000 * 60 * 60 * 24 // holy fuck I suck at units this is 24 mins not a day
 			const five = 1000*60*5 // 5 minutes
 			let timeSinceSignpostSet= Date.now()-r.SignpostTimer
 			//console.log(DayinMili) 
 			console.log(timeSinceSignpostSet)
-			if (five < timeSinceSignpostSet && timeSinceSignpostSet< 2*five){
+			if (DayinMili < timeSinceSignpostSet && timeSinceSignpostSet< 2*DayinMili){
 				chrome.storage.sync.set({
 					dailyStreak: r.dailyStreak+1,
 					SignpostTimer: Date.now()
@@ -70,7 +70,7 @@ function makeAlarm(time) {
 
 			} // if a streak exists and the user starts a timer within the rage
 
-			if (timeSinceSignpostSet > 2*five){
+			if (timeSinceSignpostSet > 2*DayinMili){
 				chrome.storage.sync.set({
 					dailyStreak: 1,
 					SignpostTimer: Date.now()
@@ -126,7 +126,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>{
 			files:["/scripts/pageObserver.js"],
 			target:{tabId: message.tabId}
 		})
-		chrome.action.setBadgeText({text: "ON",}); //somehow this is throwing an error sometimes, hard to believe that this is the root cause
+		try {
+			chrome.action.setBadgeText({text: "ON",}); //somehow this is throwing an error sometimes, hard to believe that this is the root cause
+		} catch (error) {
+			
+		}
 		// not sure what these lines of code below do
 		chrome.tabs.onRemoved.addListener((tabId) => {
 			if (tabId == tab_Id){
