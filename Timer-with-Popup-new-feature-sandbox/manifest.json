@@ -29,11 +29,6 @@
   "background": {
     "service_worker": "background-wrapper.js"
   },
-   "declarative_net_request" : {
-    "rule_resources" : [{
-      "id": "ruleset_1",
-      "enabled": true,
-      "path": "rules_1.json"}]},
   "web_accessible_resources": [{
     "resources":["audio/t-rex-roar.mp3", "audio/yay-6120.mp3", "blocked-page/index.html"],
     "matches":["<all_urls>"]
