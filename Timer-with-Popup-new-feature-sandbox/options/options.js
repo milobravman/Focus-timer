@@ -13,6 +13,7 @@ document.getElementById('add-to-block-list').addEventListener("click", handleSho
 function handleSubmitBlock() {
     let input = document.getElementById('block-input')
     try {
+
         let url = new URL(input.value)
         let newRule = {};
         chrome.declarativeNetRequest.getDynamicRules().then((res) => {
@@ -22,12 +23,13 @@ function handleSubmitBlock() {
             })
             newRule.id = newID+1 // collection still need +1 incase 1 or zero elements in the list 
             newRule.priority = 1
-            newRule.action = {
-                "type": "redirect",
-                "redirect": {
-                  "extensionPath": "/blocked-page/index.html"
-                }
-              }
+            // newRule.action = {
+            //     "type": "redirect",
+            //     "redirect": {
+            //       "extensionPath": "/blocked-page/index.html"
+            //     }
+            //   }
+            newRule.action = {"type":"block"}
             newRule.condition = {
                 "urlFilter": url.origin,
                 "resourceTypes": ["main_frame"]
