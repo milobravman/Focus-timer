@@ -8,14 +8,6 @@
           "resourceTypes" : ["main_frame"]
         }
     },
-    {
-        "id": 2,
-        "priority": 1,
-        "action": { "type": "block" },
-        "condition": {
-            "urlFilter": "google.com",
-            "resourceTypes": ["main_frame"] }
-      },
       {
         "id": 4,
         "priority": 1,

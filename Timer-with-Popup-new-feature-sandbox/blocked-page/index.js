@@ -6,17 +6,17 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
     res.forEach((score) => {
         let url = new URL(score.condition.urlFilter)
         let listItem = document.createElement("li")
-        let removedListItem = document.createElement('button')
-        removedListItem.id = score.id;
-        removedListItem.addEventListener(
-            'click',
-            function (){
-                handleRemove(score.id)
-            }
-        )
-        removedListItem.innerHTML = "remove"
+        // let removedListItem = document.createElement('button')
+        // removedListItem.id = score.id;
+        // removedListItem.addEventListener(
+        //     'click',
+        //     function (){
+        //         handleRemove(score.id)
+        //     }
+        // )
+        // removedListItem.innerHTML = "remove"
+        // listItem.appendChild(removedListItem)
         listItem.innerHTML=listItem.innerHTML + url.host
-        listItem.appendChild(removedListItem)
         list.appendChild(listItem)
     });
 })

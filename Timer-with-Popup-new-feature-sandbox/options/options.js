@@ -23,13 +23,12 @@ function handleSubmitBlock() {
             })
             newRule.id = newID+1 // collection still need +1 incase 1 or zero elements in the list 
             newRule.priority = 1
-            // newRule.action = {
-            //     "type": "redirect",
-            //     "redirect": {
-            //       "extensionPath": "/blocked-page/index.html"
-            //     }
-            //   }
-            newRule.action = {"type":"block"}
+            newRule.action = {
+                "type": "redirect",
+                "redirect": {
+                  "extensionPath": "/blocked-page/index.html"
+                }
+              }
             newRule.condition = {
                 "urlFilter": url.origin,
                 "resourceTypes": ["main_frame"]
@@ -37,20 +36,20 @@ function handleSubmitBlock() {
             chrome.declarativeNetRequest.updateDynamicRules({
                 addRules:[newRule]
             })
-            let listItem = document.createElement("li")
-            let removedListItem = document.createElement('button')
-            removedListItem.id = newID+1
-            removedListItem.addEventListener(
-                'click',
-                function (){
-                    handleRemove(newID+1)
-                }
-            )
-            removedListItem.innerHTML = "remove"
-            listItem.innerHTML=listItem.innerHTML + url.host
-            listItem.appendChild(removedListItem)
-            list.appendChild(listItem)
-            input.value = ''
+            // let listItem = document.createElement("li")
+            // let removedListItem = document.createElement('button')
+            // removedListItem.id = newID+1
+            // removedListItem.addEventListener(
+            //     'click',
+            //     function (){
+            //         handleRemove(newID+1)
+            //     }
+            // )
+            // removedListItem.innerHTML = "remove"
+            // listItem.innerHTML=listItem.innerHTML + url.host
+            // listItem.appendChild(removedListItem)
+            // list.appendChild(listItem)
+            // input.value = ''
         })
         // html addition
     } catch (error) {
@@ -89,17 +88,17 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
         console.log(score);
         let url = new URL(score.condition.urlFilter)
         let listItem = document.createElement("li")
-        let removedListItem = document.createElement('button')
-        removedListItem.id = score.id;
-        removedListItem.addEventListener(
-            'click',
-            function (){
-                handleRemove(score.id)
-            }
-        )
-        removedListItem.innerHTML = "remove"
+        // let removedListItem = document.createElement('button')
+        // removedListItem.id = score.id;
+        // removedListItem.addEventListener(
+        //     'click',
+        //     function (){
+        //         handleRemove(score.id)
+        //     }
+        // )
+        // removedListItem.innerHTML = "remove"
+        // listItem.appendChild(removedListItem)
         listItem.innerHTML=listItem.innerHTML + url.host
-        listItem.appendChild(removedListItem)
         list.appendChild(listItem)
     });
 })
