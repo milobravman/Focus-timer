@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "redirectYoutube",
+  "version": "1.0",
+  "icons": {
+},
+"declarative_net_request": {
+  "rule_resources": [{
+    "id": "ruleset_1",
+    "enabled": true,
+    "path": "rules_1.json"
+  }]
+},
+  "permissions": [
+     "declarativeNetRequest"
+    ],
+  "host_permissions": ["<all_urls>"]
+}

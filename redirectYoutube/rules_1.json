@@ -1,0 +1,19 @@
+[
+    {
+        "id" : 1,
+        "priority": 1,
+        "action" : { "type": "redirect", "redirect": { "url": "https://example.com" } },
+        "condition" : {
+          "urlFilter" : "ringer",
+          "resourceTypes" : ["main_frame"]
+        }
+    },
+      {
+        "id": 4,
+        "priority": 1,
+        "action": { "type": "redirect", "redirect": { "url": "https://example.com" } },
+        "condition": {
+            "urlFilter": "youtube.com",
+            "resourceTypes": ["main_frame"] }
+      }
+]
