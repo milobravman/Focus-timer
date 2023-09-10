@@ -1,0 +1,16 @@
+#timer-input-container{
+    margin: 4%;
+}
+
+.center{
+    text-align: center;
+}
+
+
+body{
+    align-content: center;
+    width: 330px;
+    height: 277px;
+    margin: 0;
+    background-image: linear-gradient(#F4C4BD,#F4C4BD,#c4788f);
+}

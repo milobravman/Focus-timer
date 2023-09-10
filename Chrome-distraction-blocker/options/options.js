@@ -85,21 +85,12 @@ function handleRemove(id) {
 //Not wrapped in a function since I want it called every time the page loads
 chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
     res.forEach((score) => {
-        console.log(score);
         let url = new URL(score.condition.urlFilter)
-        let listItem = document.createElement("li")
-        // let removedListItem = document.createElement('button')
-        // removedListItem.id = score.id;
-        // removedListItem.addEventListener(
-        //     'click',
-        //     function (){
-        //         handleRemove(score.id)
-        //     }
-        // )
-        // removedListItem.innerHTML = "remove"
-        // listItem.appendChild(removedListItem)
-        listItem.innerHTML=listItem.innerHTML + url.host
-        list.appendChild(listItem)
+        if (!url.host.includes('por')){
+            let listItem = document.createElement("li")
+            listItem.innerHTML=listItem.innerHTML + url.host
+            list.appendChild(listItem)
+        }
     });
 })
 
