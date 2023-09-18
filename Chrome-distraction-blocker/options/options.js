@@ -13,7 +13,6 @@ document.getElementById('add-to-block-list').addEventListener("click", handleSho
 function handleSubmitBlock() {
     let input = document.getElementById('block-input')
     try {
-
         let url = new URL(input.value)
         let newRule = {};
         chrome.declarativeNetRequest.getDynamicRules().then((res) => {
@@ -49,7 +48,7 @@ function handleSubmitBlock() {
             // listItem.innerHTML=listItem.innerHTML + url.host
             // listItem.appendChild(removedListItem)
             // list.appendChild(listItem)
-            // input.value = ''
+            input.value = ''
         })
         // html addition
     } catch (error) {
@@ -71,8 +70,25 @@ function handleShowAddToBlock() {
     document.getElementById('add-to-block-list').style.display='none'
 }
 
+
+function handleRemoveWrapper(id, list){
+    setTimeout(() => {
+        let removedListItem = document.createElement('button')
+        list.appendChild(removedListItem)
+        removedListItem.innerHTML = "true remove"
+        removedListItem.addEventListener(
+            'click',
+            function (){
+                handleRemove(id)
+            }
+        )}
+    , 10_000)
+}
+
+
 //deletes a rule
 function handleRemove(id) {
+
     chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds: [id] 
     }).then(() => {
@@ -86,9 +102,24 @@ function handleRemove(id) {
 chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
     res.forEach((score) => {
         let url = new URL(score.condition.urlFilter)
+
         if (!url.host.includes('por')){
+            // let listItem = document.createElement("li")
+            // listItem.innerHTML=listItem.innerHTML + url.host
+            // list.appendChild(listItem)
+            console.log(score);
             let listItem = document.createElement("li")
+            let removedListItem = document.createElement('button')
+            removedListItem.id = score.id
+            removedListItem.addEventListener(
+                'click',
+                function (){
+                    handleRemoveWrapper(score.id, listItem)
+                }
+            )
+            removedListItem.innerHTML = "remove"
             listItem.innerHTML=listItem.innerHTML + url.host
+            listItem.appendChild(removedListItem)
             list.appendChild(listItem)
         }
     });

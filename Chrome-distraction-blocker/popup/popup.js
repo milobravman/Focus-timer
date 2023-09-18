@@ -9,8 +9,8 @@ document.getElementById('to-options-page').addEventListener('click', handleOptio
 document.getElementById('block-button').addEventListener('click', handlePageBlock)
 
 const startTimer = document.getElementById('startTimer');
-const goToPageTwo = document.getElementById('page-2-button')
-const goToPageOne = document.getElementById("page-1-button")
+// const goToPageTwo = document.getElementById('page-2-button')
+// const goToPageOne = document.getElementById("page-1-button")
 
 // begins a sequence of functions that 
 // taking in user input
@@ -23,15 +23,16 @@ startTimer.addEventListener(
     )
 
 
-goToPageTwo.addEventListener(
-    'click',
-    makePage2Visible
-    )
+// goToPageTwo.addEventListener(
+//     'click',
+//     makePage2Visible
+//     )
 
-goToPageOne.addEventListener(
-    'click',
-    makePage1Visible
-    )
+// goToPageOne.addEventListener(
+//     'click',
+//     makePage1Visible
+//     )
+
 
 checkAccessiblePage()
 checkExisting()
