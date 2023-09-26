@@ -6,6 +6,9 @@ Blocking websites
 */
 
 document.getElementById('to-options-page').addEventListener('click', handleOptions)
+
+document.getElementById('edit').addEventListener('click', handleOptions)
+
 document.getElementById('block-button').addEventListener('click', handlePageBlock)
 
 const startTimer = document.getElementById('startTimer');

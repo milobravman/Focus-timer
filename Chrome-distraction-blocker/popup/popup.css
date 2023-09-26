@@ -39,20 +39,15 @@ body{
 }
 
 #timer-body-container{
-    width: 412px;
-    margin-top: 10%;
-    text-align: inherit;
 }
 
 #timer-input-container{
-    width: 412px;
-    margin-left: 8%;
+
 }
 
 #timer-input-label{
     display: inline-block;
     text-align: left;
-    margin-right: 6%;
     font-size: 13pt;
     font-weight: 400;
 }
@@ -60,10 +55,10 @@ body{
 #timer-input{
     border-radius: 9px;
     border: 0px solid #609;
+    font-size: 15px;
     padding: 14px;
     height: 10px;
     width: 54px;
-    font-size: 15px;
 }
 
 #timer-input:hover + #mins-label{
@@ -79,8 +74,11 @@ body{
 }
 
 #mins-label{
-    margin-left: -11%;
     font-size: 14px;
+    position: absolute;
+    left: 53%;
+    transform: translateX(-50%);
+    transform: translateY(60%);
 }
 
 #count-down{  
@@ -93,8 +91,7 @@ body{
     display: flex;
 }
 
-#startTimer, #block-button{
-    margin-left: 41px;
+#startTimer, #block-button, #edit{
     border-radius: 100px;
     background-color: #644131;
     border: none;
@@ -109,17 +106,57 @@ body{
 }
 
 .center, #startTimer{
-    text-align: center;
+    /* text-align: center; */
 }
 
 .parent {
     text-align: center;
+    margin: 15%;
   }
-  .child {
+.child {
     display: inline-block;
     vertical-align: middle;
     display: inline-block;
     text-align: left;
     font-size: 13pt;
     font-weight: 400;
-  }
+
+}
+
+#input-div{
+    width: 100px;
+}
+
+.wrapper {
+    margin-bottom: 10%;
+    margin-top: 10%;
+    width: 100%;
+    height: 45px;
+}
+
+.box {
+    height: 20px;
+    /* background: red; */
+}
+
+.div1 {
+    position: absolute;
+    left: 6%;
+    transform: translateY(40%)
+}
+
+.div2 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.div3 {
+    position: absolute;
+    right: 6%;
+
+}
+
+.relative {
+    position: relative;
+}
