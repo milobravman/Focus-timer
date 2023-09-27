@@ -69,21 +69,36 @@ function handleShowAddToBlock() {
 }
 
 function handleRemoveWrapper(id, list){
+    let buttonInfo = document.getElementById(id)
     setTimeout(() => {
+        let count2 = 24
         let removedListItem = document.createElement('button')
         list.appendChild(removedListItem)
-        removedListItem.innerHTML = "true remove"
+        removedListItem.innerHTML = "Remove " + (count2+1)
+        removedListItem.className = "buttons"
         clearInterval(unlockTimer)
+        buttonInfo.style.display="none"
+        buttonInfo.innerText = "Unlock"
         removedListItem.addEventListener(
             'click',
             function (){
                 handleRemove(id)
             }
-        )}
-    , 10_000)
-    let count = 8
+        )
+        const lockTimer = setInterval(() => {
+            removedListItem.innerHTML = "Remove " + count2
+            count2 --;
+        }, 1_000);
+        setTimeout(() => {
+            removedListItem.style.display="none"
+            buttonInfo.style.display="inline"
+            clearInterval(lockTimer)
+        }, 25_000);
+        
+    }
+    , 90_000)
+    let count = 88
     const unlockTimer = setInterval(() => {
-        let buttonInfo = document.getElementById(id)
         buttonInfo.innerText = count
         count--;
     }, 1_000);
