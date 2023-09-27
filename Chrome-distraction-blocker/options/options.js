@@ -1,9 +1,9 @@
 // display the blocked list for  the user
 const list = document.getElementById("block-list")
 
-document.getElementById('submit-block-input').addEventListener('click', handleSubmitBlock)
+// document.getElementById('submit-block-input').addEventListener('click', handleSubmitBlock)
 
-document.getElementById('add-to-block-list').addEventListener("click", handleShowAddToBlock)
+// document.getElementById('add-to-block-list').addEventListener("click", handleShowAddToBlock)
 
 // it may be poor practice to have two different functions make rules since this and the function in popup.js
 // the other option would be to make these functions send messages to the service worker, background.js and have the rules made there
@@ -104,6 +104,7 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
             // list.appendChild(listItem)
             console.log(score);
             let listItem = document.createElement("li")
+            listItem.className = "list-item"
             let removedListItem = document.createElement('button')
             removedListItem.id = score.id
             removedListItem.addEventListener(
@@ -112,7 +113,8 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
                     handleRemoveWrapper(score.id, listItem)
                 }
             )
-            removedListItem.innerHTML = "remove"
+            removedListItem.innerHTML = "Unlock"
+            removedListItem.className = "buttons"
             listItem.innerHTML=listItem.innerHTML + url.host
             listItem.appendChild(removedListItem)
             list.appendChild(listItem)

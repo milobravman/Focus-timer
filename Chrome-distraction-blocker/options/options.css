@@ -1,0 +1,31 @@
+body{
+    background-color: #6fa1fd;
+}
+
+#title{
+    text-align: center;
+}
+
+#sub-title{
+    font-size: 14pt;
+    margin-left: 2%;
+}
+
+#block{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 65%;
+    border:1px solid black;
+    border-radius: 15px;
+}
+
+.list-item{
+    margin-bottom: 3%;
+    font-size: 12pt;
+}
+
+.buttons{
+    position: absolute;
+    left: 40%;
+}
