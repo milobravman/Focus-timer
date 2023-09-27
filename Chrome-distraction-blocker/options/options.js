@@ -73,6 +73,7 @@ function handleRemoveWrapper(id, list){
         let removedListItem = document.createElement('button')
         list.appendChild(removedListItem)
         removedListItem.innerHTML = "true remove"
+        clearInterval(unlockTimer)
         removedListItem.addEventListener(
             'click',
             function (){
@@ -80,6 +81,12 @@ function handleRemoveWrapper(id, list){
             }
         )}
     , 10_000)
+    let count = 8
+    const unlockTimer = setInterval(() => {
+        let buttonInfo = document.getElementById(id)
+        buttonInfo.innerText = count
+        count--;
+    }, 1_000);
 }
 
 //deletes a rule
@@ -136,9 +143,9 @@ This opens a loophole of leaving and coming back to the page
 so maybe the # of visits to a restricted page should also call for blocking
 */
 
-document
-    .getElementById("submit-restrict-input")
-    .addEventListener("click", checkValidURL)
+// document
+//     .getElementById("submit-restrict-input")
+//     .addEventListener("click", checkValidURL)
 
 // handle Submit Restrict functions
 
