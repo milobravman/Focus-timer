@@ -70,6 +70,8 @@ function handleShowAddToBlock() {
 
 function handleRemoveWrapper(id, list){
     let buttonInfo = document.getElementById(id)
+    console.log(buttonInfo)
+    buttonInfo.disabled=true
     setTimeout(() => {
         let count2 = 24
         let removedListItem = document.createElement('button')
