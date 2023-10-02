@@ -94,6 +94,7 @@ function handleRemoveWrapper(id, list){
         setTimeout(() => {
             removedListItem.style.display="none"
             buttonInfo.style.display="inline"
+            buttonInfo.disabled=false
             clearInterval(lockTimer)
         }, 25_000);
         

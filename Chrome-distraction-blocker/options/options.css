@@ -2,22 +2,28 @@ body{
     background-color: #6fa1fd;
 }
 
-#title{
+#title {
     text-align: center;
+    font-family: ui-sans-serif;
+    /* text-decoration: wavy; */
+    color: #0d2e4a;
 }
 
-#sub-title{
+#sub-title {
     font-size: 14pt;
     margin-left: 2%;
+    font-family: serif;
+    color: #0d2e4a;
 }
 
-#block{
+#block {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     width: 65%;
-    border:1px solid black;
+    border: 1px solid transparent;
     border-radius: 15px;
+    background-color: #98b9ff;
 }
 
 .list-item{
@@ -25,7 +31,19 @@ body{
     font-size: 12pt;
 }
 
-.buttons{
+.buttons {
     position: absolute;
     left: 40%;
+    border-radius: 4px;
+    border: none;
+    padding: 1;
+    font-size: 13px;
+    font-family: serif;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }
