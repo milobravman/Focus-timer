@@ -11,7 +11,7 @@ document.getElementById('edit').addEventListener('click', handleOptions)
 
 document.getElementById('block-button').addEventListener('click', handlePageBlock)
 
-const startTimer = document.getElementById('startTimer');
+// const startTimer = document.getElementById('startTimer');
 // const goToPageTwo = document.getElementById('page-2-button')
 // const goToPageOne = document.getElementById("page-1-button")
 
@@ -20,10 +20,10 @@ const startTimer = document.getElementById('startTimer');
 // run some verifications
 // send data to other parts of the extension
 // create a real time counter
-startTimer.addEventListener(
-    'click',
-    wrapper
-    )
+// startTimer.addEventListener(
+//     'click',
+//     wrapper
+//     )
 
 
 // goToPageTwo.addEventListener(
