@@ -40,13 +40,6 @@ body{
     font-size: 20px;
 }
 
-#timer-body-container{
-}
-
-#timer-input-container{
-
-}
-
 #timer-input-label{
     display: inline-block;
     text-align: left;
@@ -100,7 +93,6 @@ body{
     color: white;
     padding: 10px 33px;
     font-size: 22px;
-    transition-duration: 0.4s;
     cursor: pointer;
 }
 
@@ -108,9 +100,6 @@ body{
     background-color: #bf6f4b;
 }
 
-.center, #startTimer{
-    /* text-align: center; */
-}
 
 .parent {
     text-align: center;
@@ -173,4 +162,12 @@ body{
     border: none;
     background: none;
     cursor: pointer;
+}
+
+#block-button:disabled,
+#block-button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: default;
 }

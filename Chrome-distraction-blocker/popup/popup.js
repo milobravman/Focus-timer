@@ -112,7 +112,7 @@ function checkAccessiblePage () {
             // notAvailable.innerHTML ="Not available on this page"
             // let title = document.getElementsByTagName('div')
             // document.body.insertBefore(notAvailable, title[0])
-            
+            document.getElementById('block-button').disabled=true
         } 
       });
 }
