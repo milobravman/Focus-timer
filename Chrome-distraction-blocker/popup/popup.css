@@ -100,7 +100,8 @@ body{
     color: white;
     padding: 10px 33px;
     font-size: 22px;
-    transition-duration: 0.4s
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 
 #startTimer:hover{
@@ -166,4 +167,10 @@ body{
 #feadback {
     margin-left: 8%;
     color: #655a5a;
+}
+
+#feedback{
+    border: none;
+    background: none;
+    cursor: pointer;
 }

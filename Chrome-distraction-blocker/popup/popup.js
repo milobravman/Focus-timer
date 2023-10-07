@@ -11,6 +11,8 @@ document.getElementById('edit').addEventListener('click', handleOptions)
 
 document.getElementById('block-button').addEventListener('click', handlePageBlock)
 
+document.getElementById('feedback').addEventListener('click', handleFeedbackForm)
+
 // const startTimer = document.getElementById('startTimer');
 // const goToPageTwo = document.getElementById('page-2-button')
 // const goToPageOne = document.getElementById("page-1-button")
@@ -39,6 +41,14 @@ document.getElementById('block-button').addEventListener('click', handlePageBloc
 
 checkAccessiblePage()
 checkExisting()
+
+// creates a new tab at the to the feedback form
+
+function handleFeedbackForm() {
+    chrome.tabs.create({
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSfEWG97aDzOPonfq2UMo6U54CojLpJplMDLpvYRmO5_ZR38tQ/viewform?usp=sf_link"
+    })
+}
 
 // creates a new tab at the options.html
 function handleOptions() {
@@ -94,14 +104,15 @@ function handlePageBlock() {
 function checkAccessiblePage () {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         if (tabs[0].url === undefined){
-            let page = document.getElementsByTagName('div')
-            for (let i = 0; i< page.length; i++) {
-                page[i].innerHTML=""
-            }
-            const notAvailable = document.createElement("span")
-            notAvailable.innerHTML ="Not available on this page"
-            let title = document.getElementsByTagName('div')
-            document.body.insertBefore(notAvailable, title[0])
+            // let page = document.getElementsByTagName('div')
+            // for (let i = 0; i< page.length; i++) {
+            //     page[i].innerHTML=""
+            // }
+            // const notAvailable = document.createElement("span")
+            // notAvailable.innerHTML ="Not available on this page"
+            // let title = document.getElementsByTagName('div')
+            // document.body.insertBefore(notAvailable, title[0])
+            
         } 
       });
 }
