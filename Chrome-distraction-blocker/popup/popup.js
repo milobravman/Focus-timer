@@ -40,7 +40,7 @@ document.getElementById('feedback').addEventListener('click', handleFeedbackForm
 
 
 checkAccessiblePage()
-checkExisting()
+// checkExisting()
 
 // creates a new tab at the to the feedback form
 
@@ -163,19 +163,19 @@ function wrapper() {
 
 // checks local storage to see if alarm exist
 // this way users can see the timer in real time if they wish
-function checkExisting() {
-    chrome.storage.local.get(["stop"]).then((result) => {
-        if (Number.isSafeInteger(result.stop))// this is checks if a alarm exists
-        {  
-            let timeLeft = result.stop - Date.now() // because date is tract in ms the current date is always smaller than a future date until 2038 
-            if (timeLeft > 0) {
-                document.getElementById("timer-input").style.display = "none";
-                document.getElementById("startTimer").style.display = "none";
-                timeWrapper(timeLeft/60_000)
-            }
-        }
-    })
-}
+// function checkExisting() {
+//     chrome.storage.local.get(["stop"]).then((result) => {
+//         if (Number.isSafeInteger(result.stop))// this is checks if a alarm exists
+//         {  
+//             let timeLeft = result.stop - Date.now() // because date is tract in ms the current date is always smaller than a future date until 2038 
+//             if (timeLeft > 0) {
+//                 document.getElementById("timer-input").style.display = "none";
+//                 document.getElementById("startTimer").style.display = "none";
+//                 timeWrapper(timeLeft/60_000)
+//             }
+//         }
+//     })
+// }
 
 // creates a realtime counter that shows up in popup.html
 function timeWrapper(time) {

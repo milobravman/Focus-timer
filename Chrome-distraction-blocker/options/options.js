@@ -167,20 +167,20 @@ so maybe the # of visits to a restricted page should also call for blocking
 
 // handle Submit Restrict functions
 
-function checkValidURL() {
-    try {
-    let url = new URL(document
-        .getElementById("restrict-input-url").value)
-    let timeToAllow = document
-        .getElementById("restrict-input-time-using").value
-    let timeToBlock = document
-        .getElementById("restrict-input-time-cooldown").value
-    addToLocalStorage(url, timeToAllow, timeToBlock)
-    } catch (error) {
-        console.log('nope');
-        // add error message for user
-    }
-}
+// function checkValidURL() {
+//     try {
+//     let url = new URL(document
+//         .getElementById("restrict-input-url").value)
+//     let timeToAllow = document
+//         .getElementById("restrict-input-time-using").value
+//     let timeToBlock = document
+//         .getElementById("restrict-input-time-cooldown").value
+//     addToLocalStorage(url, timeToAllow, timeToBlock)
+//     } catch (error) {
+//         console.log('nope');
+//         // add error message for user
+//     }
+// }
 
 function addToLocalStorage(url, timeA, timeB) {
     let existing = []

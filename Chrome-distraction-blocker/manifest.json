@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "chrome-distraction-blocker",
+  "name": "Distraction Blocker",
   "version": "1.0",
   "icons": {
     "16": "images/icon-16.png",
@@ -20,17 +20,14 @@
     },
   "permissions": [
      "scripting",
-     "alarms",
-     "storage",
-     "declarativeNetRequest",
-     "webNavigation"
+     "declarativeNetRequest"
     ],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background-wrapper.js"
   },
   "web_accessible_resources": [{
-    "resources":["audio/t-rex-roar.mp3", "audio/yay-6120.mp3", "blocked-page/index.html"],
+    "resources":["blocked-page/index.html"],
     "matches":["<all_urls>"]
 }]
 }
