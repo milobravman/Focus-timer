@@ -48,3 +48,7 @@ button[disabled]{
   color: #666666;
 }
 
+.error {
+    position: absolute;
+    left: 50%;
+}

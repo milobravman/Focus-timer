@@ -1,13 +1,7 @@
 // display the blocked list for  the user
 const list = document.getElementById("block-list")
 
-// document.getElementById('submit-block-input').addEventListener('click', handleSubmitBlock)
 
-// document.getElementById('add-to-block-list').addEventListener("click", handleShowAddToBlock)
-
-// it may be poor practice to have two different functions make rules since this and the function in popup.js
-// the other option would be to make these functions send messages to the service worker, background.js and have the rules made there
-// the downside would be like likely increase in time it would take for a rule to be added since there would be the extra step involved
 function handleSubmitBlock() {
     let input = document.getElementById('block-input')
     try {
@@ -33,19 +27,6 @@ function handleSubmitBlock() {
             chrome.declarativeNetRequest.updateDynamicRules({
                 addRules:[newRule]
             })
-            // let listItem = document.createElement("li")
-            // let removedListItem = document.createElement('button')
-            // removedListItem.id = newID+1
-            // removedListItem.addEventListener(
-            //     'click',
-            //     function (){
-            //         handleRemove(newID+1)
-            //     }
-            // )
-            // removedListItem.innerHTML = "remove"
-            // listItem.innerHTML=listItem.innerHTML + url.host
-            // listItem.appendChild(removedListItem)
-            // list.appendChild(listItem)
             input.value = ''
         })
         // html addition
@@ -68,11 +49,15 @@ function handleShowAddToBlock() {
     document.getElementById('add-to-block-list').style.display='none'
 }
 
+
+// This function may be a little hard to read because it uses...
+// ------- Nested setTimouts and setInteravals! -------
 function handleRemoveWrapper(id, list){
     let buttonInfo = document.getElementById(id)
     console.log(buttonInfo)
+    console.log(list)
     buttonInfo.disabled=true
-    setTimeout(() => {
+    setTimeout(() => { // this is gonna controle the button that actally removes the rule 
         let count2 = 24
         let removedListItem = document.createElement('button')
         list.appendChild(removedListItem)
@@ -96,6 +81,11 @@ function handleRemoveWrapper(id, list){
             buttonInfo.style.display="inline"
             buttonInfo.disabled=false
             clearInterval(lockTimer)
+            let missedButton = document.createElement('span')
+            list.appendChild(missedButton)
+            missedButton.innerText = "You missed the remove button! please try again!"
+            missedButton.style.color="red"
+            missedButton.className = "error"
         }, 25_000);
         
     }
@@ -122,12 +112,6 @@ function handleRemove(id) {
 chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
     res.forEach((score) => {
         let url = new URL(score.condition.urlFilter)
-
-        if (!url.host.includes('por')){
-            // let listItem = document.createElement("li")
-            // listItem.innerHTML=listItem.innerHTML + url.host
-            // list.appendChild(listItem)
-            console.log(score);
             let listItem = document.createElement("li")
             listItem.className = "list-item"
             let removedListItem = document.createElement('button')
@@ -143,7 +127,6 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
             listItem.innerHTML=listItem.innerHTML + url.host
             listItem.appendChild(removedListItem)
             list.appendChild(listItem)
-        }
     });
 })
 

@@ -1,1 +1,0 @@
-documenting the strage bug where youtube is unblockable
