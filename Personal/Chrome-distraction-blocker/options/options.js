@@ -1,4 +1,8 @@
 // display the blocked list for  the user
+
+/* NOTE this is my personal version that, for now gets ride the of ablity to remove blocked website.
+   I will exparament with different versions in the future.
+*/
 const list = document.getElementById("block-list")
 
 
@@ -52,50 +56,50 @@ function handleShowAddToBlock() {
 
 // This function may be a little hard to read because it uses...
 // ------- Nested setTimouts and setInteravals! -------
-function handleRemoveWrapper(id, list){
-    let buttonInfo = document.getElementById(id)
-    console.log(buttonInfo)
-    console.log(list)
-    buttonInfo.disabled=true
-    setTimeout(() => { // this is gonna controle the button that actally removes the rule 
-        let count2 = 24
-        let removedListItem = document.createElement('button')
-        list.appendChild(removedListItem)
-        removedListItem.innerHTML = "Remove " + (count2+1)
-        removedListItem.className = "buttons"
-        clearInterval(unlockTimer)
-        buttonInfo.style.display="none"
-        buttonInfo.innerText = "Unlock"
-        removedListItem.addEventListener(
-            'click',
-            function (){
-                handleRemove(id)
-            }
-        )
-        const lockTimer = setInterval(() => {
-            removedListItem.innerHTML = "Remove " + count2
-            count2 --;
-        }, 1_000);
-        setTimeout(() => {
-            removedListItem.style.display="none"
-            buttonInfo.style.display="inline"
-            buttonInfo.disabled=false
-            clearInterval(lockTimer)
-            let missedButton = document.createElement('span')
-            list.appendChild(missedButton)
-            missedButton.innerText = "You missed the remove button! please try again!"
-            missedButton.style.color="red"
-            missedButton.className = "error"
-        }, 25_000);
+// function handleRemoveWrapper(id, list){
+//     let buttonInfo = document.getElementById(id)
+//     console.log(buttonInfo)
+//     console.log(list)
+//     buttonInfo.disabled=true
+//     setTimeout(() => { // this is gonna controle the button that actally removes the rule 
+//         let count2 = 24
+//         let removedListItem = document.createElement('button')
+//         list.appendChild(removedListItem)
+//         removedListItem.innerHTML = "Remove " + (count2+1)
+//         removedListItem.className = "buttons"
+//         clearInterval(unlockTimer)
+//         buttonInfo.style.display="none"
+//         buttonInfo.innerText = "Unlock"
+//         removedListItem.addEventListener(
+//             'click',
+//             function (){
+//                 handleRemove(id)
+//             }
+//         )
+//         const lockTimer = setInterval(() => {
+//             removedListItem.innerHTML = "Remove " + count2
+//             count2 --;
+//         }, 1_000);
+//         setTimeout(() => {
+//             removedListItem.style.display="none"
+//             buttonInfo.style.display="inline"
+//             buttonInfo.disabled=false
+//             clearInterval(lockTimer)
+//             let missedButton = document.createElement('span')
+//             list.appendChild(missedButton)
+//             missedButton.innerText = "You missed the remove button! please try again!"
+//             missedButton.style.color="red"
+//             missedButton.className = "error"
+//         }, 25_000);
         
-    }
-    , 90_000)
-    let count = 88
-    const unlockTimer = setInterval(() => {
-        buttonInfo.innerText = count
-        count--;
-    }, 1_000);
-}
+//     }
+//     , 90_000)
+//     let count = 88
+//     const unlockTimer = setInterval(() => {
+//         buttonInfo.innerText = count
+//         count--;
+//     }, 1_000);
+// }
 
 //deletes a rule
 function handleRemove(id) {
@@ -114,56 +118,21 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
         let url = new URL(score.condition.urlFilter)
             let listItem = document.createElement("li")
             listItem.className = "list-item"
-            let removedListItem = document.createElement('button')
-            removedListItem.id = score.id
-            removedListItem.addEventListener(
-                'click',
-                function (){
-                    handleRemoveWrapper(score.id, listItem)
-                }
-            )
-            removedListItem.innerHTML = "Unlock"
-            removedListItem.className = "buttons"
+            // let removedListItem = document.createElement('button')
+            // removedListItem.id = score.id
+            // removedListItem.addEventListener(
+            //     'click',
+            //     function (){
+            //         handleRemoveWrapper(score.id, listItem)
+            //     }
+            // )
+            // removedListItem.innerHTML = "Unlock"
+            // removedListItem.className = "buttons"
             listItem.innerHTML=listItem.innerHTML + url.host
-            listItem.appendChild(removedListItem)
+            // listItem.appendChild(removedListItem)
             list.appendChild(listItem)
     });
 })
-
-/*
-How it could work
-User goes to restricted page
-Timer starts counting to the limit
-If the limit is reached
-The blocking rule is added
-A timestamp is created for when this rule should be automatically removed
-When the service worker loads it needs to check if there are any restricted websites actively blocked and if the should be unblocked
-If the use leaves the page before the limit is reached
-The time resets
-This opens a loophole of leaving and coming back to the page
-so maybe the # of visits to a restricted page should also call for blocking
-*/
-
-// document
-//     .getElementById("submit-restrict-input")
-//     .addEventListener("click", checkValidURL)
-
-// handle Submit Restrict functions
-
-// function checkValidURL() {
-//     try {
-//     let url = new URL(document
-//         .getElementById("restrict-input-url").value)
-//     let timeToAllow = document
-//         .getElementById("restrict-input-time-using").value
-//     let timeToBlock = document
-//         .getElementById("restrict-input-time-cooldown").value
-//     addToLocalStorage(url, timeToAllow, timeToBlock)
-//     } catch (error) {
-//         console.log('nope');
-//         // add error message for user
-//     }
-// }
 
 function addToLocalStorage(url, timeA, timeB) {
     let existing = []
