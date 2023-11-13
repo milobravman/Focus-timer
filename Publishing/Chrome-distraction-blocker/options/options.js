@@ -6,6 +6,9 @@ const list = document.getElementById("block-list")
 const t = document.addEventListener("visibilitychange", (event) => {
     console.log("the event listener has fired!")
     console.log (mainButtonTimer)
+    if (mainButtonTimer ==1){
+        console.log ("I should end the count down timer")
+    }
 });
 
 
