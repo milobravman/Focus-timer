@@ -1,14 +1,11 @@
 // display the blocked list for  the user
 let mainButtonTimer = null
+let unlockTimer = null
 const list = document.getElementById("block-list")
 
 
 const t = document.addEventListener("visibilitychange", (event) => {
-    console.log("the event listener has fired!")
-    console.log (mainButtonTimer)
-    if (mainButtonTimer ==1){
-        console.log ("I should end the count down timer")
-    }
+    location.reload();
 });
 
 
@@ -102,7 +99,7 @@ function handleRemoveWrapper(id, list){
     , 90_000)
     mainButtonTimer
     let count = 88
-    const unlockTimer = setInterval(() => {
+    unlockTimer = setInterval(() => {
         buttonInfo.innerText = count
         count--;
     }, 1_000);
