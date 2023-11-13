@@ -1,5 +1,12 @@
 // display the blocked list for  the user
+let mainButtonTimer = null
 const list = document.getElementById("block-list")
+
+
+const t = document.addEventListener("visibilitychange", (event) => {
+    console.log("the event listener has fired!")
+    console.log (mainButtonTimer)
+});
 
 
 function handleSubmitBlock() {
@@ -31,7 +38,7 @@ function handleSubmitBlock() {
         })
         // html addition
     } catch (error) {
-        console.log("not a valid URL")
+        //console.log("not a valid URL")
         input.value = ''
         let errorMessage = document.getElementById('block-input-label')
         errorMessage.innerHTML = 'copy url of site to block, Ex "https://www.youtube.com"'
@@ -54,10 +61,10 @@ function handleShowAddToBlock() {
 // ------- Nested setTimouts and setInteravals! -------
 function handleRemoveWrapper(id, list){
     let buttonInfo = document.getElementById(id)
-    console.log(buttonInfo)
-    console.log(list)
+    //console.log(buttonInfo)
+    //console.log(list)
     buttonInfo.disabled=true
-    setTimeout(() => { // this is gonna controle the button that actally removes the rule 
+    mainButtonTimer = setTimeout(() => { // this is gonna controle the button that actally removes the rule 
         let count2 = 24
         let removedListItem = document.createElement('button')
         list.appendChild(removedListItem)
@@ -90,6 +97,7 @@ function handleRemoveWrapper(id, list){
         
     }
     , 90_000)
+    mainButtonTimer
     let count = 88
     const unlockTimer = setInterval(() => {
         buttonInfo.innerText = count
@@ -133,7 +141,7 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
 function addToLocalStorage(url, timeA, timeB) {
     let existing = []
     chrome.storage.local.get("rules").then((res) => {
-        console.log(res)
+        //console.log(res)
     })
     chrome.storage.local.set({rules: [{
         url: url.origin,
