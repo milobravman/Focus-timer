@@ -130,41 +130,6 @@ chrome.declarativeNetRequest.getDynamicRules().then((res)=>{
     });
 })
 
-/*
-How it could work
-User goes to restricted page
-Timer starts counting to the limit
-If the limit is reached
-The blocking rule is added
-A timestamp is created for when this rule should be automatically removed
-When the service worker loads it needs to check if there are any restricted websites actively blocked and if the should be unblocked
-If the use leaves the page before the limit is reached
-The time resets
-This opens a loophole of leaving and coming back to the page
-so maybe the # of visits to a restricted page should also call for blocking
-*/
-
-// document
-//     .getElementById("submit-restrict-input")
-//     .addEventListener("click", checkValidURL)
-
-// handle Submit Restrict functions
-
-// function checkValidURL() {
-//     try {
-//     let url = new URL(document
-//         .getElementById("restrict-input-url").value)
-//     let timeToAllow = document
-//         .getElementById("restrict-input-time-using").value
-//     let timeToBlock = document
-//         .getElementById("restrict-input-time-cooldown").value
-//     addToLocalStorage(url, timeToAllow, timeToBlock)
-//     } catch (error) {
-//         console.log('nope');
-//         // add error message for user
-//     }
-// }
-
 function addToLocalStorage(url, timeA, timeB) {
     let existing = []
     chrome.storage.local.get("rules").then((res) => {
