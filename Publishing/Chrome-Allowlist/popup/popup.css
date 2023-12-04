@@ -1,0 +1,173 @@
+body{
+    align-content: center;
+    width: 412px;
+    height: 346px;
+    margin: 0;
+    background-image: linear-gradient(#F4C4BD,#F4C4BD,#c4788f);
+}
+
+#title{
+    height: 20%;
+    text-align: center;
+    display: table-cell;
+    width: 412px;
+    height: 45px;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 23px;
+    color: #302225;
+    border-bottom: black;
+    border-bottom-width: 1%;
+    background-color: #b5beff
+}
+
+#to-options-page{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: none;
+    background: inherit;
+}
+
+#main-body{
+    background-image: linear-gradient(#F4C4BD,#F4C4BD,#c4788f);
+    margin-bottom: 0;
+    height: 89%;
+}
+
+#feature-title{
+    margin: 0%;
+    font-size: 20px;
+}
+
+#timer-input-label{
+    display: inline-block;
+    text-align: left;
+    font-size: 13pt;
+    font-weight: 400;
+}
+
+#timer-input{
+    border-radius: 9px;
+    border: 0px solid #609;
+    font-size: 15px;
+    padding: 14px;
+    height: 10px;
+    width: 54px;
+}
+
+#timer-input:hover + #mins-label{
+    display: none;
+}
+
+#timer-input:focus{
+    outline-width: thick;
+}
+
+#timer-input:focus + #mins-label{
+    display: none;
+}
+
+#mins-label{
+    font-size: 14px;
+    position: absolute;
+    left: 53%;
+    transform: translateX(-50%);
+    transform: translateY(60%);
+}
+
+#count-down{  
+    font-size: 35pt;
+}
+
+#submit-button-container{
+    margin-top: 9%;
+    justify-content: center;
+    display: flex;
+}
+
+#startTimer, #block-button, #edit{
+    border-radius: 100px;
+    background-color: #644131;
+    border: none;
+    color: white;
+    padding: 10px 33px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+#startTimer:hover{
+    background-color: #bf6f4b;
+}
+
+
+.parent {
+    text-align: center;
+    margin: 15%;
+  }
+.child {
+    display: inline-block;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: left;
+    font-size: 13pt;
+    font-weight: 400;
+
+}
+
+#input-div{
+    width: 100px;
+}
+
+.wrapper {
+    margin-bottom: 10%;
+    margin-top: 10%;
+    width: 100%;
+    height: 45px;
+}
+
+.box {
+    height: 20px;
+    /* background: red; */
+}
+
+.div1 {
+    position: absolute;
+    left: 6%;
+    transform: translateY(40%)
+}
+
+.div2 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.div3 {
+    position: absolute;
+    right: 6%;
+
+}
+
+.relative {
+    position: relative;
+}
+
+#feadback {
+    margin-left: 8%;
+    color: #655a5a;
+}
+
+#feedback{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#block-button:disabled,
+#block-button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: default;
+}
