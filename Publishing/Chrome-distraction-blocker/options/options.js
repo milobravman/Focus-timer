@@ -65,7 +65,7 @@ function handleRemoveWrapper(id, list){
     //console.log(list)
     buttonInfo.disabled=true
     mainButtonTimer = setTimeout(() => { // this is gonna controle the button that actally removes the rule 
-        let count2 = 24
+        let count2 = 4
         let removedListItem = document.createElement('button')
         list.appendChild(removedListItem)
         removedListItem.innerHTML = "Remove " + (count2+1)
@@ -93,12 +93,12 @@ function handleRemoveWrapper(id, list){
             missedButton.innerText = "You missed the remove button! please try again!"
             missedButton.style.color="red"
             missedButton.className = "error"
-        }, 25_000);
+        }, 5_000);
         
     }
-    , 90_000)
+    , 12_000)
     mainButtonTimer
-    let count = 88
+    let count = 10
     unlockTimer = setInterval(() => {
         buttonInfo.innerText = count
         count--;
